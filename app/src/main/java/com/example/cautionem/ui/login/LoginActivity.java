@@ -36,25 +36,29 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //On référence l'activity associée au LoginActivity, c'est à dire activity_login.xml
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         getSupportActionBar().hide();
-        setContentView(binding.getRoot());
+        setContentView(binding.getRoot());// binding.getRoot() <=> R.layout.activity_login.xml
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
+        //On référence les éléments du activity_login.xml
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
 
+        //On crée un observer de class LoginFormState
+        //LoginFormState check les datas invalides
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
                 if (loginFormState == null) {
                     return;
                 }
-                loginButton.setEnabled(loginFormState.isDataValid());
+                loginButton.setEnabled(loginFormState.isDataValid());//Activation du bouton si les datas sont valides
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));
                 }
@@ -64,6 +68,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //On crée un observer de class LoginResult
+        //LoginResult check si les datas sont correctes ou répertoriées
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
@@ -84,6 +90,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Création d'un surveillant du texte écrit
+        //Check après changement du texte pour vérifier les nouvelle data
+        //En utilisant loginViewModel.loginDataChanged()
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -101,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         };
+        //On ajoute le surveillant aux deux EditText
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {

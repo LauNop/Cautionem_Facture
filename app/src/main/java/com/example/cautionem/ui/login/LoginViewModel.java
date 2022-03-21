@@ -41,6 +41,7 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
+    //Check les datas pour générer widget erreur s'il y en a une
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {
             loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
