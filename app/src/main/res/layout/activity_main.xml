@@ -7,6 +7,36 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/inscriptbut"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Inscription"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/connectbut"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/transparency"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Connexion"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="3dp" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
