@@ -2,6 +2,7 @@
     <string name="app_name">Cautionem</string>
     <string name="title_activity_login">Connectez-vous</string>
     <string name="prompt_email">Email</string>
+    <string name="prompt_pseudo">Email</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Connexion</string>
     <string name="action_sign_in_short">Connexion</string>

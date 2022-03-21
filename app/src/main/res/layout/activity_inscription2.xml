@@ -12,10 +12,10 @@
         android:layout_height="60dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="260dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/noir"
         android:fontFamily="@font/roboto_bold"
         android:text="Suivant"
-        android:textColor="@color/white"
+        android:textColor="@color/blanc"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
