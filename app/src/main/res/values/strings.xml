@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Cautionem</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_pseudo">Pseudo</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Sign in or register</string>
