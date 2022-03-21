@@ -4,10 +4,17 @@
     <string name="prompt_pseudo">Pseudo</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Mot de passe</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="action_sign_in">Connexion ou inscription</string>
+    <string name="action_sign_in_short">Connexion</string>
+    <string name="welcome">"Bienvenue !"</string>
+    <string name="invalid_username">Nom utilisateur invalide</string>
+    <string name="invalid_password">Le mot de passe doit contenir plus de 5 caractères</string>
+    <string name="login_failed">"Erreur de connexion"</string>
+    <string name="création">Crée</string>
+    <string name="rejoindre">Rejoindre</string>
+    <string name="p">Président(e)</string>
+    <string name="vp">Vice-Président(e)</string>
+    <string name="t">Trésorier</string>
+    <string name="c">Responsable communication</string>
+    <string name="m">Membre</string>
 </resources>
