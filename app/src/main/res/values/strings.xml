@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Cautionem</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Connectez-vous</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Mot de passe</string>
-    <string name="action_sign_in">Connexion ou inscription</string>
+    <string name="action_sign_in">Connexion</string>
     <string name="action_sign_in_short">Connexion</string>
     <string name="welcome">"Bienvenue !"</string>
     <string name="invalid_username">Nom utilisateur invalide</string>
@@ -14,6 +14,6 @@
     <string name="p">Président(e)</string>
     <string name="vp">Vice-Président(e)</string>
     <string name="t">Trésorier</string>
-    <string name="c">Responsable communication</string>
+    <string name="com">Responsable communication</string>
     <string name="m">Membre</string>
 </resources>
