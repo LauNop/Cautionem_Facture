@@ -28,5 +28,14 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        inscript.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent otherActivity = new Intent(getApplicationContext(),InscriptionActivity.class);
+                startActivity(otherActivity);
+                finish();
+            }
+        });
     }
 }
