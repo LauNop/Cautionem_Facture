@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cautionem">
         <activity
+            android:name=".CreationAssoActivity"
+            android:exported="false" />
+        <activity
             android:name=".InscriptionActivity"
             android:exported="false" />
         <activity
