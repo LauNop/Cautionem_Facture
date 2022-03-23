@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cautionem">
         <activity
-            android:name=".InfosActivity"
+            android:name=".RejoindreActivity"
             android:exported="false" />
         <activity
             android:name=".CreationAssoActivity"

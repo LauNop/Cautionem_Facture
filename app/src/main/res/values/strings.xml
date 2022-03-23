@@ -2,11 +2,13 @@
     <string name="app_name">Cautionem</string>
     <string name="title_activity_login">Connectez-vous</string>
     <string name="titre_activity_inscription">Créer votre compte</string>
+    <string name="titre_activity_rejoindre">Rejoindre votre association</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_pseudo">Pseudo</string>
     <string name="prompt_name">Nom de  l\'association</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="prompt_RIB">RIB</string>
+    <string name="prompt_link">Insérer un lien</string>
     <string name="action_sign_in">Connexion</string>
     <string name="action_sign_in_short">Connexion</string>
     <string name="welcome">"Bienvenue !"</string>
@@ -22,4 +24,5 @@
     <string name="m">Membre</string>
     <string name="lien">Partager le lien</string>
     <string name="next">Suivant</string>
+    <string name="join">Rejoindre</string>
 </resources>
