@@ -4,64 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inscription2Activity">
+    android:textAlignment="viewEnd"
+    tools:context=".SuiviActivity">
 
     <Button
-        android:id="@+id/nextbut"
-        android:layout_width="267dp"
+        android:id="@+id/nextbut5"
+        android:layout_width="371dp"
         android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="@color/noir"
+        android:layout_marginTop="220dp"
+        android:backgroundTint="@color/rouge_c"
         android:fontFamily="@font/roboto_bold"
-        android:text="@string/next"
+        android:gravity="center_vertical"
+        android:text="@string/D"
         android:textColor="@color/blanc"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-    <EditText
-        android:id="@+id/username2"
+    <Button
+        android:id="@+id/nextbut6"
         android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:autofillHints="@string/prompt_pseudo"
-        android:hint="@string/prompt_pseudo"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/rouge_f"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center_vertical"
+        android:text="@string/m"
+        android:textColor="@color/blanc"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/nextbut7" />
 
-    <ImageView
-        android:id="@+id/logo3"
-        android:layout_width="65dp"
-        android:layout_height="66dp"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/nextbut7"
+        android:layout_width="371dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/rouge_c"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center_vertical"
+        android:text="@string/F"
+        android:textColor="@color/blanc"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/nextbut5" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/comfortaa"
-        android:text="Profil"
+        android:text="Infos"
         android:textColor="#100F0F"
         android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo3" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.cardview.widget.CardView
@@ -69,7 +75,7 @@
         android:layout_width="105dp"
         android:layout_height="105dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginBottom="400dp"
+        android:layout_marginBottom="425dp"
         app:cardBackgroundColor="#0B2FF4"
         app:cardCornerRadius="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,5 +96,6 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
