@@ -25,4 +25,6 @@
     <string name="lien">Partager le lien</string>
     <string name="next">Suivant</string>
     <string name="join">Rejoindre</string>
+    <string name="default_role">Role du membre</string>
+    <string name="pseudo_membre">pseudo membre</string>
 </resources>

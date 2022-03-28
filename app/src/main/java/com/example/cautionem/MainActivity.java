@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
+
         this.connect = (Button) findViewById(R.id.connectbut);
         this.inscript = (Button) findViewById(R.id.inscriptbut);
 
@@ -38,4 +39,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
