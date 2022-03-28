@@ -13,6 +13,9 @@
             android:name=".Membre_Activity"
             android:exported="false" />
         <activity
+            android:name=".SuiviActivity"
+            android:exported="false" />
+        <activity
             android:name=".RejoindreActivity"
             android:exported="false" />
         <activity

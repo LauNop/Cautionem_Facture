@@ -9,6 +9,7 @@
         <entry key="..\:/Users/lnop0/AndroidStudioProjects/Cautionem/app/src/main/res/drawable/ic_launcher_background.xml" value="0.236" />
         <entry key="..\:/Users/lnop0/AndroidStudioProjects/Cautionem/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.13359375" />
         <entry key="..\:/Users/lnop0/AndroidStudioProjects/Cautionem/app/src/main/res/layout-w936dp/activity_login.xml" value="0.205859375" />
+        <entry key="..\:/Users/lnop0/AndroidStudioProjects/Cautionem/app/src/main/res/layout/activity_infos.xml" value="0.1203125" />
         <entry key="..\:/Users/lnop0/AndroidStudioProjects/Cautionem/app/src/main/res/layout/activity_inscription.xml" value="0.264" />
         <entry key="..\:/Users/lnop0/AndroidStudioProjects/Cautionem/app/src/main/res/layout/activity_inscription2.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/lnop0/AndroidStudioProjects/Cautionem/app/src/main/res/layout/activity_login.xml" value="0.264" />
@@ -17,7 +18,11 @@
         <entry key="..\:/Users/lnop0/AndroidStudioProjects/Cautionem/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.245" />
         <entry key="..\:/Users/lnop0/AndroidStudioProjects/Cautionem/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.245" />
         <entry key="app/src/main/res/layout/activity_creation_asso.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_infos.xml" value="0.2608695652173913" />
         <entry key="app/src/main/res/layout/activity_inscription2.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.11666666666666667" />
+        <entry key="app/src/main/res/layout/activity_suivi.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.335" />
       </map>
     </option>
   </component>

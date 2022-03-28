@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //On référence l'activity associée au LoginActivity, c'est à dire activity_login.xml
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        getSupportActionBar().hide();
         setContentView(binding.getRoot());// binding.getRoot() <=> R.layout.activity_login.xml
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
