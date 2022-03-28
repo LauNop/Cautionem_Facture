@@ -25,4 +25,6 @@
     <string name="lien">Partager le lien</string>
     <string name="next">Suivant</string>
     <string name="join">Rejoindre</string>
+    <string name="D">Devis</string>
+    <string name="F">Facture</string>
 </resources>
