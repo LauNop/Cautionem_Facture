@@ -29,4 +29,7 @@
     <string name="F">Facture</string>
     <string name="pseudo_membre">Pseudo</string>
     <string name="default_role">Role</string>
+    <string name="Creer_PDF">Créer PDF</string>
+    <string name="Charger_PDF">Charger PDF</string>
+    <string name="Entrer_texte">Entrez votre texte</string>
 </resources>
