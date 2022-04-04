@@ -13,7 +13,7 @@ public class Personne {
     }
 
     //  Méthodes
-    public String getRole(){return role; }
+    public String getRole(){return role;}
 
-    public String getPseudo() { return pseudo; }
+    public String getPseudo() {return pseudo;}
 }

@@ -6,12 +6,13 @@
 
     <ImageView
         android:id="@+id/icon_membre"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/lambda_profile" />
 
     <RelativeLayout
-        android:layout_margin="10dp"
+        android:layout_margin="23dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

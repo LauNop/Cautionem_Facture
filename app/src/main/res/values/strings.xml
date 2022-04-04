@@ -27,8 +27,6 @@
     <string name="join">Rejoindre</string>
     <string name="D">Devis</string>
     <string name="F">Facture</string>
-    <string name="charger_pdf">Charger PDF</string>
-    <string name="cr_er_pdf">Créer PDF</string>
-    <string name="textview">TextView</string>
-    <string name="entrez_votre_texte">Entrez votre texte</string>
+    <string name="pseudo_membre">Pseudo</string>
+    <string name="default_role">Role</string>
 </resources>
