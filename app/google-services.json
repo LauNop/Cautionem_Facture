@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "118727778918",
+    "project_id": "cautionem-a1155",
+    "storage_bucket": "cautionem-a1155.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118727778918:android:e20a49fc03312486dd83a7",
+        "android_client_info": {
+          "package_name": "com.example.cautionem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118727778918-54k5k23hmkch7f2uqnt7kph7bct46q25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjtDcxR8qDbRc2RBBPZiUfVVRwBc8G2co"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118727778918-54k5k23hmkch7f2uqnt7kph7bct46q25.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
