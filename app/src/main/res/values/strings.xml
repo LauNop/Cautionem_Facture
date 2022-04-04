@@ -27,4 +27,6 @@
     <string name="join">Rejoindre</string>
     <string name="D">Devis</string>
     <string name="F">Facture</string>
+    <string name="pseudo_membre">Pseudo</string>
+    <string name="default_role">Role</string>
 </resources>
