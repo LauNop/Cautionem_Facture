@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cautionem" >
         <activity
+            android:name=".Membre_Activity"
+            android:exported="false" />
+        <activity
             android:name=".SuiviActivity"
             android:exported="false" />
         <activity
