@@ -23,11 +23,12 @@ public class MainActivity extends AppCompatActivity {
 
         this.connect = (Button) findViewById(R.id.connectbut);
         this.inscript = (Button) findViewById(R.id.inscriptbut);
+        mAuth = FirebaseAuth.getInstance();
 
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent otherActivity = new Intent(getApplicationContext(),com.example.cautionem.ui.login.LoginActivity.class);
+                Intent otherActivity = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(otherActivity);
                 finish();
             }
@@ -48,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         //Check if user is signed in (non-null and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            //reload();
-            System.out.println("Hello this is bad");
+            startActivity(new Intent(getApplicationContext(), AssoActivity.class));
+            finish();
         }
     }
 

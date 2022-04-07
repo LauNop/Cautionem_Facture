@@ -3,6 +3,7 @@
     package="com.example.cautionem">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 
     <application
@@ -34,7 +35,7 @@
             android:name=".Inscription2Activity"
             android:exported="false" />
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
         <activity

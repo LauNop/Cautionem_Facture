@@ -1,10 +1,15 @@
 package com.example.cautionem;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.content.Intent;
 import android.os.Bundle;
+
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,35 +21,37 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+public class LoginActivity extends AppCompatActivity {
 
-public class InscriptionActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private Button registerButton;
+    private Button loginButton;
 
     FirebaseAuth mAuth;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscription);
 
-        usernameEditText = findViewById(R.id.username3);
-        passwordEditText = findViewById(R.id.password2);
-        registerButton = findViewById(R.id.nextbut2);
+        setContentView(R.layout.activity_connexion);
+
+
+        usernameEditText = findViewById(R.id.username);
+        passwordEditText = findViewById(R.id.password);
+        loginButton = findViewById(R.id.nextbut8);
 
         mAuth = FirebaseAuth.getInstance();
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createUser();
+                loginUser();
             }
         });
     }
 
-    private void createUser(){
+    private void loginUser(){
         String email = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
@@ -57,19 +64,18 @@ public class InscriptionActivity extends AppCompatActivity {
             passwordEditText.requestFocus();
         }
         else{
-            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(InscriptionActivity.this,"Utilisateur a bien été enregistré",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), Inscription2Activity.class));
+                        Toast.makeText(LoginActivity.this,"Vous êtes connecté",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     }
                     else{
-                        Toast.makeText(InscriptionActivity.this,"Erreur de l'enregistrement utilisateur : "+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"Erreur de connexion : "+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
     }
-
 }
