@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AssoActivity">
+
+    <ListView
+        android:id="@+id/Asso_list"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+    <!--
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:translationY="670dp"
+        app:srcCompat="@android:drawable/ic_menu_add" />
+       -->
+</LinearLayout>
