@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             usernameEditText.requestFocus();
         }
         else if(TextUtils.isEmpty(password)){
-            passwordEditText.setError("Le champ 'Mot de passe ne peut pas être vide");
+            passwordEditText.setError("Le champ 'Mot' de passe ne peut pas être vide");
             passwordEditText.requestFocus();
         }
         else{
@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(LoginActivity.this,"Vous êtes connecté",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), AssoActivity.class));
+                        finish();
                     }
                     else{
                         Toast.makeText(LoginActivity.this,"Erreur de connexion : "+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();

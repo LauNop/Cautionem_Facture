@@ -19,10 +19,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username2" />
+        app:layout_constraintTop_toBottomOf="@+id/pseudo1" />
 
     <EditText
-        android:id="@+id/username2"
+        android:id="@+id/pseudo1"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -57,7 +57,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/comfortaa"
-        android:text="Profil"
+        android:text="@string/profil"
         android:textColor="#100F0F"
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="parent"
