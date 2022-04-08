@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cautionem">
         <activity
+            android:name=".AssoActivity"
+            android:exported="false" />
+        <activity
             android:name=".PDF_Activity"
             android:exported="false" />
         <activity
