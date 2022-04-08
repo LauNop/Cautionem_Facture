@@ -63,6 +63,7 @@ public class InscriptionActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(InscriptionActivity.this,"Utilisateur a bien été enregistré",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), Inscription2Activity.class));
+                        finish();
                     }
                     else{
                         Toast.makeText(InscriptionActivity.this,"Erreur de l'enregistrement utilisateur : "+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();

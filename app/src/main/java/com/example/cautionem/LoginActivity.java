@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(LoginActivity.this,"Vous êtes connecté",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        startActivity(new Intent(getApplicationContext(), AssoActivity.class));
                     }
                     else{
                         Toast.makeText(LoginActivity.this,"Erreur de connexion : "+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
