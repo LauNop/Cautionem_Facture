@@ -33,5 +33,6 @@
     <string name="Charger_PDF">Charger PDF</string>
     <string name="Entrer_texte">Entrez votre texte</string>
     <string name="default_nom_asso">Asso0</string>
-    <string name="profil">Profil</string>
+    <string name="profil1">Votre profil</string>
+    <string name="info">A propos</string>
 </resources>

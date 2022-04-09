@@ -57,7 +57,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/comfortaa"
-        android:text="@string/profil"
+        android:text="@string/profil1"
         android:textColor="#100F0F"
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="parent"
