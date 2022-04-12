@@ -52,25 +52,6 @@ public class Inscription2Activity extends AppCompatActivity {
             pseudoEditText.requestFocus();
         }
         else{
-            //Enregistré la data
-            Map<String, Object> user = new HashMap<>();
-            user.put("pseudo",pseudo);
-
-            // Add a new document with a generated ID
-            db.collection("users")
-                    .add(user)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(Inscription2Activity.this,"DocumentSnapshot added with ID: " + documentReference.getId(),Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Inscription2Activity.this,"Error adding document: "+ e.getMessage().toString(),Toast.LENGTH_SHORT).show();
-                        }
-                    });
             startActivity(new Intent(getApplicationContext(),AssoActivity.class));
             finish();
         }
