@@ -33,6 +33,7 @@ public class InscriptionActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
+    UserRepository userRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,24 +73,7 @@ public class InscriptionActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(InscriptionActivity.this,"Utilisateur a bien été enregistré",Toast.LENGTH_SHORT).show();
-                        Map<String, Object> user = new HashMap<>();
-                        user.put("email",email);
-
-                        // Add a new document with a generated ID
-                        db.collection("users")
-                                .add(user)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Toast.makeText(InscriptionActivity.this,"DocumentSnapshot added with ID: " + documentReference.getId(),Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(InscriptionActivity.this,"Error adding document: "+ e.getMessage().toString(),Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                        userRepository.createUser(email);
 
                         startActivity(new Intent(getApplicationContext(), Inscription2Activity.class));
                         finish();
