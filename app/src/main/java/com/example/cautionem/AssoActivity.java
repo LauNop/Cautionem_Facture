@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class AssoActivity extends AppCompatActivity {
 
     private ArrayList<Asso> AssoList = new ArrayList<Asso>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
