@@ -13,18 +13,20 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class Inscription2Activity extends AppCompatActivity {
 
     private EditText prénomEditText;
     private EditText nomEditText;
     private Button next;
+
     FirebaseFirestore db;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class Inscription2Activity extends AppCompatActivity {
         this.prénomEditText = findViewById(R.id.prénomInput);
         this.nomEditText = findViewById(R.id.nomInput);
 
+        mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
 
@@ -50,6 +53,9 @@ public class Inscription2Activity extends AppCompatActivity {
         String prénom = prénomEditText.getText().toString();
         String nom = nomEditText.getText().toString();
 
+        FirebaseUser user = mAuth.getCurrentUser();
+        String uid = user.getUid();
+
         if(TextUtils.isEmpty(prénom)){
             prénomEditText.setError("Le champ 'Prénom' ne peut pas être vide");
             prénomEditText.requestFocus();
@@ -59,6 +65,23 @@ public class Inscription2Activity extends AppCompatActivity {
             nomEditText.requestFocus();
         }
         else{
+            DocumentReference washingtonRef = db.collection("Users").document(uid);
+
+// Set the "isCapital" field of the city 'DC'
+            washingtonRef
+                    .update("prénom", prénom,"nom",nom)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Inscription2Activity.this,"DocumentSnapshot successfully updated!",Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Inscription2Activity.this,"Error updating document",Toast.LENGTH_SHORT).show();
+                        }
+                    });
             startActivity(new Intent(getApplicationContext(),AssoActivity.class));
             finish();
         }
