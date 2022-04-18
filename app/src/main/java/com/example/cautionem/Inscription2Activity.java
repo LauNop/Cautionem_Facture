@@ -21,7 +21,8 @@ import java.util.Map;
 
 public class Inscription2Activity extends AppCompatActivity {
 
-    private EditText pseudoEditText;
+    private EditText prénomEditText;
+    private EditText nomEditText;
     private Button next;
     FirebaseFirestore db;
 
@@ -31,7 +32,8 @@ public class Inscription2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_inscription2);
 
         this.next = (Button) findViewById(R.id.nextbut);
-        this.pseudoEditText = findViewById(R.id.pseudo1);
+        this.prénomEditText = findViewById(R.id.prénomInput);
+        this.nomEditText = findViewById(R.id.nomInput);
 
         db = FirebaseFirestore.getInstance();
 
@@ -45,11 +47,16 @@ public class Inscription2Activity extends AppCompatActivity {
     }
 
     private void PseudoUser(){
-        String pseudo = pseudoEditText.getText().toString();
+        String prénom = prénomEditText.getText().toString();
+        String nom = nomEditText.getText().toString();
 
-        if(TextUtils.isEmpty(pseudo)){
-            pseudoEditText.setError("Le champ 'pseudo' ne peut pas être vide");
-            pseudoEditText.requestFocus();
+        if(TextUtils.isEmpty(prénom)){
+            prénomEditText.setError("Le champ 'Prénom' ne peut pas être vide");
+            prénomEditText.requestFocus();
+        }
+        else if(TextUtils.isEmpty(nom)){
+            nomEditText.setError("Le champ 'Nom' ne peut pas être vide");
+            nomEditText.requestFocus();
         }
         else{
             startActivity(new Intent(getApplicationContext(),AssoActivity.class));
