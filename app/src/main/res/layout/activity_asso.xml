@@ -13,9 +13,7 @@
         <ListView
             android:id="@+id/Asso_list"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
-
+            android:layout_height="wrap_content">
         </ListView>
 
     </RelativeLayout>
@@ -28,6 +26,6 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@android:drawable/ic_addorjoin_white"
+        android:src="@drawable/ic_addorjoin_white"
         app:fabSize="normal"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
