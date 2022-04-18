@@ -38,4 +38,5 @@
     <string name="info">A propos</string>
     <string name="todo">TODO</string>
     <string name="nom_de_l_association">Nom de l\'association</string>
+    <string name="JOC">Créer ou rejoindre</string>
 </resources>

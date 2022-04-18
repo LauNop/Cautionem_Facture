@@ -26,6 +26,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:clickable="true"
+        android:contentDescription="@string/JOC"
         android:src="@drawable/ic_addorjoin_white"
-        app:fabSize="normal"/>
+        app:fabSize="normal" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
