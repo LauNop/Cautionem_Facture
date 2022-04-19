@@ -2,7 +2,10 @@ package com.example.cautionem;
 
 import static com.example.cautionem.R.id.Asso_list;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -12,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -26,6 +30,7 @@ import java.util.ArrayList;
 public class AssoActivity extends AppCompatActivity {
 
     private ArrayList<Asso> AssoList = new ArrayList<Asso>();
+    private FloatingActionButton fbtn;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -35,11 +40,21 @@ public class AssoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asso);
 
+        fbtn = findViewById(R.id.floatingbtn);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
         assemblageAsso();
+
+        fbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), CreationAssoActivity.class));
+                finish();
+            }
+        });
+
     }
 
     private void assemblageAsso(){
