@@ -26,6 +26,8 @@ public class CreationAssoActivity extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseAuth mAuth;
 
+    Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +45,6 @@ public class CreationAssoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CreateAsso();
-                startActivity(new Intent(getApplicationContext(), SuiviActivity.class));
-                finish();
             }
         });
     }
@@ -77,6 +77,13 @@ public class CreationAssoActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(CreationAssoActivity.this,"L'asso "+nomAsso+" a bien été enregistré",Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
+                    bundle = new Bundle();
+                    bundle.putString("key1",nomAsso);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
