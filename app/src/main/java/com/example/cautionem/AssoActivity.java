@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class AssoActivity extends AppCompatActivity {
 
     private ArrayList<Asso> AssoList = new ArrayList<Asso>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,10 +20,9 @@ public class AssoActivity extends AppCompatActivity {
 
         // liste des membres
 
-        AssoList.add(new Asso("Laun le boss"));
-        AssoList.add(new Asso("Asso 02"));
-        AssoList.add(new Asso("Mafiat MEDEVILLE"));
-        AssoList.add(new Asso("SUS DOG GANG"));
+        AssoList.add(new Asso("Asso 01","Hello@gmail.com","THERIBXXXXXXX"));
+        AssoList.add(new Asso("Asso 02","Hello@gmail.com","THERIBXXXXXXX"));
+
 
         // voir la liste
         ListView AssoList = findViewById(Asso_list);

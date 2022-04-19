@@ -4,7 +4,8 @@
     <string name="titre_activity_inscription">Créer votre compte</string>
     <string name="titre_activity_rejoindre">Rejoindre votre association</string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_pseudo">Pseudo</string>
+    <string name="prompt_nom">Nom</string>
+    <string name="prompt_prénom">Prénom</string>
     <string name="prompt_name">Nom de  l\'association</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="prompt_RIB">RIB</string>
@@ -35,4 +36,7 @@
     <string name="default_nom_asso">Asso0</string>
     <string name="profil1">Votre profil</string>
     <string name="info">A propos</string>
+    <string name="todo">TODO</string>
+    <string name="nom_de_l_association">Nom de l\'association</string>
+    <string name="JOC">Créer ou rejoindre</string>
 </resources>

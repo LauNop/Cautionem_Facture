@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -33,7 +35,6 @@ public class InscriptionActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
-    UserRepository userRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +73,7 @@ public class InscriptionActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(InscriptionActivity.this,"Utilisateur a bien été enregistré",Toast.LENGTH_SHORT).show();
-                        userRepository.createUser(email);
+                        addDataToFirestore(email);
 
                         startActivity(new Intent(getApplicationContext(), Inscription2Activity.class));
                         finish();
@@ -85,6 +85,33 @@ public class InscriptionActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    public void addDataToFirestore(String email){
+        CollectionReference dbUser = db.collection("Users");
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        String uid = user.getUid();
+        // adding our data to our users object class.
+        User userModel = new User(uid,email);
+
+        // below method is use to add data to Firebase Firestore.
+        dbUser.document(uid).set(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // after the data addition is successful
+                // we are displaying a success toast message.
+                Toast.makeText(InscriptionActivity.this,"L'utilisateur "+uid+" a bien été enregistré",Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // this method is called when the data addition process is failed.
+                // displaying a toast message when data addition is failed.
+                // Log.w(TAG, "Error adding document", e);
+                Toast.makeText(InscriptionActivity.this, "Erreur dans l'ajout de l'utilisateur \n" + e, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
