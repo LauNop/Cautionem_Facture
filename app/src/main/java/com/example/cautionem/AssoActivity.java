@@ -42,7 +42,7 @@ public class AssoActivity extends AppCompatActivity {
         assemblageAsso();
     }
 
-    public void assemblageAsso(){
+    private void assemblageAsso(){
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
         CollectionReference dbAsso = db.collection("Users").document(uid).collection("Assos");
@@ -67,13 +67,5 @@ public class AssoActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-        /*DocumentReference docRef = db.collection("cities").document("BJ");
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Asso asso = documentSnapshot.toObject(Asso.class);
-            }
-        });*/
     }
 }

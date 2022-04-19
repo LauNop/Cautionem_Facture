@@ -15,7 +15,7 @@
         android:backgroundTint="@color/rouge_c"
         android:fontFamily="@font/roboto_bold"
         android:gravity="center_vertical"
-        android:text="@string/D"
+        android:text="@string/Upload"
         android:textColor="#616161"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
