@@ -26,7 +26,7 @@
     <string name="lien">Partager le lien</string>
     <string name="next">Suivant</string>
     <string name="join">Rejoindre</string>
-    <string name="D">Devis</string>
+    <string name="Upload">Charger une facture</string>
     <string name="F">Facture</string>
     <string name="pseudo_membre">Pseudo</string>
     <string name="default_role">Role</string>

@@ -8,6 +8,9 @@ public class Asso {
     private String RIB;
 
     //  Classe
+    public Asso(){
+
+    }
     public Asso(String nom,String email,String RIB){
         this.nom = nom;
         this.email = email;
