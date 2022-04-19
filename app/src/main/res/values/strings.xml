@@ -35,6 +35,4 @@
     <string name="default_nom_asso">Asso0</string>
     <string name="profil1">Votre profil</string>
     <string name="info">A propos</string>
-    <string name="todo">TODO</string>
-    <string name="nom_de_l_association">Nom de l\'association</string>
 </resources>
