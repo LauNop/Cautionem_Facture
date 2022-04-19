@@ -7,7 +7,7 @@
     tools:context=".InfosActivity">
 
     <EditText
-        android:id="@+id/editTextTextPassword3"
+        android:id="@+id/ribPlace"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -18,10 +18,10 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username6" />
+        app:layout_constraintTop_toBottomOf="@+id/emailPlace" />
 
     <EditText
-        android:id="@+id/username6"
+        android:id="@+id/emailPlace"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -33,10 +33,10 @@
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/nomAssoPlace" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/nomAssoPlace"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -47,10 +47,10 @@
         android:text="@string/nom_de_l_association"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nextbut4" />
+        app:layout_constraintTop_toBottomOf="@+id/sharebtn" />
 
     <Button
-        android:id="@+id/nextbut4"
+        android:id="@+id/sharebtn"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
@@ -58,7 +58,7 @@
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/rouge_f"
         android:fontFamily="@font/roboto_bold"
-        android:text="@string/m"
+        android:text="@string/lien"
         android:textColor="@color/blanc"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,14 +80,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/savebtn"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="60dp"
-        android:text="@string/lien"
-        android:textColor="#000000"
+        android:text="@string/save"
+        android:textColor="@color/blanc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

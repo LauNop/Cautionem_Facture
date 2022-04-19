@@ -36,6 +36,8 @@ public class AssoActivity extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseAuth mAuth;
 
+    Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +80,12 @@ public class AssoActivity extends AppCompatActivity {
                                 assoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                        Toast.makeText(AssoActivity.this,"Vous cliquez sur l'association "+AssoList.get(i).getNom(),Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
+                                        bundle = new Bundle();
+                                        bundle.putString("key1",AssoList.get(i).getNom());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                        finish();
                                     }
                                 });
                                 Toast.makeText(AssoActivity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();

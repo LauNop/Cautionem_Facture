@@ -24,9 +24,12 @@ import java.util.ArrayList;
 public class Facture_Activity extends AppCompatActivity {
 
     private ArrayList<Facture> FactureList = new ArrayList<Facture>();
+    private String nomAsso;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
+
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,9 @@ public class Facture_Activity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        bundle = getIntent().getExtras();
+        nomAsso = bundle.getString("key1","Default");
 
         FactureList.add(new Facture("Facture 01"));
         FactureList.add(new Facture("Facture 02"));
@@ -50,7 +56,7 @@ public class Facture_Activity extends AppCompatActivity {
     private void assemblageFacture() {
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        CollectionReference dbFacture = db.collection("Users").document(uid).collection("Factures");
+        CollectionReference dbFacture = db.collection("Users").document(uid).collection("Assos").document(nomAsso).collection("Factures");
 
         dbFacture
                 .get()

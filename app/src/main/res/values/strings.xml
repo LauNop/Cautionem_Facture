@@ -41,4 +41,5 @@
     <string name="JOC">Créer ou rejoindre</string>
     <string name="nom_facture">Nom facture</string>
     <string name="telecharger">Télécharger</string>
+    <string name="save">Enregistrer</string>
 </resources>
