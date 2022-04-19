@@ -39,4 +39,6 @@
     <string name="todo">TODO</string>
     <string name="nom_de_l_association">Nom de l\'association</string>
     <string name="JOC">Créer ou rejoindre</string>
+    <string name="nom_facture">Nom facture</string>
+    <string name="telecharger">Télécharger</string>
 </resources>

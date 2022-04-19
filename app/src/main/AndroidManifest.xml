@@ -26,6 +26,9 @@
             android:name=".SuiviActivity"
             android:exported="false" />
         <activity
+            android:name=".InfosActivity"
+            android:exported="false" />
+        <activity
             android:name=".RejoindreActivity"
             android:exported="false" />
         <activity
