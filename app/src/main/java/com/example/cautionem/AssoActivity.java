@@ -51,8 +51,12 @@ public class AssoActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-
+        crée_but.setClickable(false);
+        rejoindre_but.setClickable(false);
+        crée_but.setVisibility(View.INVISIBLE);
+        rejoindre_but.setVisibility(View.INVISIBLE);
         assemblageAsso();
+
 
 
         // voir la liste
@@ -70,16 +74,19 @@ public class AssoActivity extends AppCompatActivity {
         crée_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SetVisible();
-                Toast.makeText(AssoActivity.this, "edit clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), CreationAssoActivity.class));
+                Toast.makeText(AssoActivity.this, "create clicked", Toast.LENGTH_SHORT).show();
+                finish();
+
             }
         });
 
         rejoindre_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SetVisible();
-                Toast.makeText(AssoActivity.this, "image clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), RejoindreActivity.class));
+                Toast.makeText(AssoActivity.this, "join clicked", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
@@ -104,6 +111,7 @@ public class AssoActivity extends AppCompatActivity {
             rejoindre_but.setVisibility(View.VISIBLE);
             isOpen = true;
         }
+    }
 
     private void assemblageAsso(){
         FirebaseUser user = mAuth.getCurrentUser();
