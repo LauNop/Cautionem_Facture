@@ -92,6 +92,12 @@ public class AssoActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        //Custom with a dialog "Are you sure to exit ?"
+    }
+
 
     private void SetVisible() {
 

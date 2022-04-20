@@ -68,4 +68,10 @@ public class SuiviActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(getApplicationContext(), AssoActivity.class));
+        finish();
+    }
 }

@@ -49,6 +49,12 @@ public class CreationAssoActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(getApplicationContext(), AssoActivity.class));
+        finish();
+    }
+
     private void CreateAsso() {
         String email = emailEditText.getText().toString();
         String nomAsso = nomAssoEditText.getText().toString();

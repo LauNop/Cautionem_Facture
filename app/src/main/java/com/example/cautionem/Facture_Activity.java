@@ -6,6 +6,7 @@ import static com.example.cautionem.R.id.Membre_list;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -47,10 +48,16 @@ public class Facture_Activity extends AppCompatActivity {
         FactureList.add(new Facture("Facture 03"));
 
         assemblageFacture();
+    }
 
-        // voir la liste
-
-
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
+        bundle = new Bundle();
+        bundle.putString("key1",nomAsso);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     private void assemblageFacture() {

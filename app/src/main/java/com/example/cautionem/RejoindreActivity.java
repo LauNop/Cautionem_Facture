@@ -27,4 +27,10 @@ public class RejoindreActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(getApplicationContext(), AssoActivity.class));
+        finish();
+    }
 }

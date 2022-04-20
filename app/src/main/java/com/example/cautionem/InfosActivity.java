@@ -2,6 +2,7 @@ package com.example.cautionem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +44,16 @@ public class InfosActivity extends AppCompatActivity {
         nomAsso = bundle.getString("key1","Default");
 
         setUpInfo();
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
+        bundle = new Bundle();
+        bundle.putString("key1",nomAsso);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     private void setUpInfo() {

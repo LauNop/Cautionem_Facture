@@ -51,6 +51,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
+    }
     private void loginUser(){
         String email = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
@@ -29,6 +30,7 @@ public class PDF_Activity extends AppCompatActivity {
     private String stringFilePath = Environment.getExternalStorageDirectory().getPath()+"Download/TD.pdf";
     private File file = new File(stringFilePath);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,11 @@ public class PDF_Activity extends AppCompatActivity {
             e.printStackTrace();
             textView7.setText("Error in Reading");
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
     }
 
 }

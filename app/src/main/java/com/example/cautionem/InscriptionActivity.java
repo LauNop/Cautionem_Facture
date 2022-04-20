@@ -88,6 +88,12 @@ public class InscriptionActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
+    }
+
     public void addDataToFirestore(String email){
         CollectionReference dbUser = db.collection("Users");
 

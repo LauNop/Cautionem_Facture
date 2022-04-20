@@ -57,6 +57,16 @@ public class Membre_Activity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
+        bundle = new Bundle();
+        bundle.putString("key1",nomAsso);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
+
     private void assemblageMembre() {
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
