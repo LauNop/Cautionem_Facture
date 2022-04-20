@@ -15,13 +15,13 @@
         android:backgroundTint="@color/rouge_c"
         android:fontFamily="@font/roboto_bold"
         android:gravity="center_vertical"
-        android:text="@string/D"
+        android:text="@string/m"
         android:textColor="#616161"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/titreAssoNom" />
 
     <Button
         android:id="@+id/nextbut6"
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nextbut5" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/titreAssoNom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
