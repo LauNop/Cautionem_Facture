@@ -4,9 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_asso.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_connexion.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_creation_asso.xml" value="0.358695652173913" />
         <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_facture.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_infos.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_inscription.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_inscription2.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_main.xml" value="0.2259963768115942" />
         <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_membre.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_pdf.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_rejoindre.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/activity_suivi.xml" value="0.358695652173913" />
         <entry key="..\:/Users/arsen/AndroidStudioProjects/Cautionem_Facture/app/src/main/res/layout/adapter_asso.xml" value="0.358695652173913" />
