@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:autofillHints="@string/prompt_prénom"
     tools:context=".Inscription2Activity">
 
     <EditText
@@ -13,15 +14,15 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:autofillHints="@string/prompt_name"
         android:ems="10"
+        android:hint="@string/prompt_nom"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="@string/prompt_nom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prénomInput"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/prénomInput" />
 
     <Button
         android:id="@+id/nextbut"
@@ -86,7 +87,8 @@
                 android:layout_width="100dp"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/logo" />
+                android:src="@drawable/logo"
+                android:contentDescription="@string/todo" />
 
         </androidx.cardview.widget.CardView>
 
@@ -99,14 +101,15 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:autofillHints="@string/prompt_prénom"
         android:ems="10"
+        android:hint="@string/prompt_prénom"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="@string/prompt_prénom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        android:autofillHints="" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
