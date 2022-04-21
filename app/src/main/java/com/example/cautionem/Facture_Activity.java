@@ -1,6 +1,7 @@
 package com.example.cautionem;
 
 import static com.example.cautionem.R.id.Asso_list;
+import static com.example.cautionem.R.id.Facture_list;
 import static com.example.cautionem.R.id.Membre_list;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class Facture_Activity extends AppCompatActivity {
 
     private ArrayList<Facture> FactureList = new ArrayList<Facture>();
     private String nomAsso;
+    private ListView facturelistView;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -36,6 +38,8 @@ public class Facture_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facture);
+
+       facturelistView = findViewById(Facture_list);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -74,11 +78,10 @@ public class Facture_Activity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Facture facture = document.toObject(Facture.class);
                                 FactureList.add(facture);
-                                ListView facturelistView = findViewById(Membre_list);
-                                facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
                                 Toast.makeText(Facture_Activity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                             }
+                            facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
                         } else {
                             Toast.makeText(Facture_Activity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
                             //Log.d(TAG, "Error getting documents: ", task.getException());

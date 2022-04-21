@@ -28,6 +28,7 @@ public class Membre_Activity extends AppCompatActivity {
 
     private ArrayList<Personne> PersonneList = new ArrayList<Personne>();
     private String nomAsso;
+    private ListView membreListView;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -38,6 +39,8 @@ public class Membre_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_membre);
+
+        membreListView = findViewById(Membre_list);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -81,12 +84,10 @@ public class Membre_Activity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Personne membre = document.toObject(Personne.class);
                                 PersonneList.add(membre);
-                                ListView membreListView = findViewById(Membre_list);
-                                membreListView.setAdapter(new Personne_Adapter(Membre_Activity.this, PersonneList));
-
                                 Toast.makeText(Membre_Activity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                             }
+                            membreListView.setAdapter(new Personne_Adapter(Membre_Activity.this, PersonneList));
                         } else {
                             Toast.makeText(Membre_Activity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
                             //Log.d(TAG, "Error getting documents: ", task.getException());

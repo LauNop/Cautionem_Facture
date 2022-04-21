@@ -28,6 +28,7 @@ import java.util.ArrayList;
 public class AssoActivity extends AppCompatActivity {
 
     private ArrayList<Asso> AssoList = new ArrayList<Asso>();
+    private ListView assoListView;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -35,7 +36,6 @@ public class AssoActivity extends AppCompatActivity {
     Bundle bundle;
 
     FloatingActionButton main_but,crée_but,rejoindre_but;
-    Button articles_btn,FC_btn;
     boolean isOpen;
 
     @Override
@@ -46,6 +46,7 @@ public class AssoActivity extends AppCompatActivity {
         main_but = (FloatingActionButton) findViewById(R.id.but_main);
         crée_but = (FloatingActionButton) findViewById(R.id.crée);
         rejoindre_but = (FloatingActionButton) findViewById(R.id.rejoindre);
+        assoListView = findViewById(Asso_list);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -55,14 +56,8 @@ public class AssoActivity extends AppCompatActivity {
         rejoindre_but.setClickable(false);
         crée_but.setVisibility(View.INVISIBLE);
         rejoindre_but.setVisibility(View.INVISIBLE);
+
         assemblageAsso();
-
-
-
-        // voir la liste
-        ListView AssoList = findViewById(Asso_list);
-        AssoList.setAdapter(new Asso_Adapter(this, this.AssoList));
-
 
         //set the click listener on the add btn
         main_but.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +85,17 @@ public class AssoActivity extends AppCompatActivity {
             }
         });
 
+        assoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
+                bundle = new Bundle();
+                bundle.putString("key1",AssoList.get(i).getNom());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -133,23 +139,10 @@ public class AssoActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Asso asso = document.toObject(Asso.class);
                                 AssoList.add(asso);
-                                ListView assoListView = findViewById(Asso_list);
-                                assoListView.setAdapter(new Asso_Adapter(AssoActivity.this, AssoList));
-
-                                assoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                        Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
-                                        bundle = new Bundle();
-                                        bundle.putString("key1",AssoList.get(i).getNom());
-                                        intent.putExtras(bundle);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                });
                                 Toast.makeText(AssoActivity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                             }
+                            assoListView.setAdapter(new Asso_Adapter(AssoActivity.this, AssoList));
                         } else {
                             Toast.makeText(AssoActivity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
                             //Log.d(TAG, "Error getting documents: ", task.getException());
