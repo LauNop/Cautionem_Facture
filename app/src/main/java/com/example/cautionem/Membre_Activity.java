@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -29,6 +30,7 @@ public class Membre_Activity extends AppCompatActivity {
     private ArrayList<Personne> PersonneList = new ArrayList<Personne>();
     private String nomAsso;
     private ListView membreListView;
+    FloatingActionButton lien;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -41,6 +43,7 @@ public class Membre_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_membre);
 
         membreListView = findViewById(Membre_list);
+        lien = (FloatingActionButton) findViewById(R.id.lien);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -57,6 +60,12 @@ public class Membre_Activity extends AppCompatActivity {
         // voir la liste
         assemblageMembre();
 
+        lien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(Membre_Activity.this, "Création lien", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

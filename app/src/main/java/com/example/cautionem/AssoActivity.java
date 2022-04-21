@@ -70,7 +70,7 @@ public class AssoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), CreationAssoActivity.class));
-                Toast.makeText(AssoActivity.this, "create clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AssoActivity.this, "create clicked", Toast.LENGTH_SHORT).show();
                 finish();
 
             }
@@ -80,7 +80,7 @@ public class AssoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), RejoindreActivity.class));
-                Toast.makeText(AssoActivity.this, "join clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AssoActivity.this, "join clicked", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
