@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 public class Inscription2Activity extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class Inscription2Activity extends AppCompatActivity {
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
+    FirebaseStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +42,13 @@ public class Inscription2Activity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
 
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PseudoUser();
+                ProfileUser();
             }
         });
     }
@@ -55,12 +59,15 @@ public class Inscription2Activity extends AppCompatActivity {
         //Custom with a dialog "Are you sure to exit ?"
     }
 
-    private void PseudoUser(){
+    private void ProfileUser(){
         String prénom = prénomEditText.getText().toString();
         String nom = nomEditText.getText().toString();
 
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
+
+        // Create a storage reference from our app
+        StorageReference storageRef = storage.getReference();
 
         if(TextUtils.isEmpty(prénom)){
             prénomEditText.setError("Le champ 'Prénom' ne peut pas être vide");
