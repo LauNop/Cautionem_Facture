@@ -36,7 +36,7 @@ public class CreationAssoActivity extends AppCompatActivity {
         nomAssoEditText = findViewById(R.id.nomAsso);
         emailEditText = findViewById(R.id.email);
         ribEditText = findViewById(R.id.rib);
-        btn = findViewById(R.id.nextbut3);
+        btn = (Button) findViewById(R.id.nextbut3);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();

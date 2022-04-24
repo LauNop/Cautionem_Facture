@@ -44,7 +44,7 @@ public class InscriptionActivity extends AppCompatActivity {
 
         usernameEditText = findViewById(R.id.username3);
         passwordEditText = findViewById(R.id.password2);
-        registerButton = findViewById(R.id.nextbut2);
+        registerButton = (Button) findViewById(R.id.nextbut2);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();

@@ -35,7 +35,7 @@ public class InfosActivity extends AppCompatActivity {
         this.nAEditText = findViewById(R.id.nomAssoPlace);
         this.emailEditText = findViewById(R.id.emailPlace);
         this.ribEditText = findViewById(R.id.ribPlace);
-        this.share = findViewById(R.id.savebtn);
+        this.share = (Button) findViewById(R.id.savebtn);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();

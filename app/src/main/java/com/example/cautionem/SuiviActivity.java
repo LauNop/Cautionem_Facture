@@ -21,9 +21,9 @@ public class SuiviActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suivi);
 
-        this.info =  findViewById(R.id.nextbut6);
-        this.membre =  findViewById(R.id.nextbut5);
-        this.facture =  findViewById(R.id.nextbut7);
+        this.info = (Button) findViewById(R.id.nextbut6);
+        this.membre = (Button) findViewById(R.id.nextbut5);
+        this.facture = (Button) findViewById(R.id.nextbut7);
         this.nA =  findViewById(R.id.titreAssoNom);
 
         bundle = getIntent().getExtras();
