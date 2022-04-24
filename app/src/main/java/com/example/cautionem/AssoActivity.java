@@ -157,8 +157,34 @@ public class AssoActivity extends AppCompatActivity {
     private void assemblageAsso(){
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        CollectionReference dbAsso = db.collection("Users").document(uid).collection("Assos");
 
+        CollectionReference dbUserAsso = db.collection("Users").document(uid).collection("Assos");
+        CollectionReference dbAsso = db.collection("Asso");
+
+        //ArrayList de récupération d'Id
+        ArrayList<String> assoId = new ArrayList<String>();
+
+        //Récupération de l'ID des assos de l'utilisateur dans la collection : Users/"UserId"/Assos
+        dbUserAsso
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                User_Asso userAsso = document.toObject(User_Asso.class);
+                                assoId.add(userAsso.getId());
+                                Toast.makeText(AssoActivity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Toast.makeText(AssoActivity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
+                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        //Récupération des assos de l'utilisateur dans la collection : Assos, selon les id récupérés dans l'ArrayList assoId
         dbAsso
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -166,10 +192,12 @@ public class AssoActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Asso asso = document.toObject(Asso.class);
-                                AssoList.add(asso);
-                                Toast.makeText(AssoActivity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                if(assoId.contains(document.getId())) {
+                                    Asso asso = document.toObject(Asso.class);
+                                    AssoList.add(asso);
+                                    Toast.makeText(AssoActivity.this, document.getId() + " => " + document.getData(), Toast.LENGTH_SHORT).show();
+                                    //Log.d(TAG, document.getId() + " => " + document.getData());
+                                }
                             }
                             assoListView.setAdapter(new Asso_Adapter(AssoActivity.this, AssoList));
                         } else {

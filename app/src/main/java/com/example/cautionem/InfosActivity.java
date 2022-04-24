@@ -57,9 +57,23 @@ public class InfosActivity extends AppCompatActivity {
     }
 
     private void setUpInfo() {
+        //Accès au document détenant les information de l'asso
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        DocumentReference docRef = db.collection("Users").document(uid).collection("Assos").document(nomAsso);
+        final String[] assoId = new String[1];
+        db
+                .collection("Users")
+                .document(uid).collection("Assos")
+                .document(nomAsso)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                       assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
+                    }
+                });
+
+        DocumentReference docRef = db.collection("Assos").document(assoId[0]);
 
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override

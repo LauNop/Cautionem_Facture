@@ -12,9 +12,9 @@ public class SuiviActivity extends AppCompatActivity {
 
     private Button info, membre,facture;
     private TextView nA;
-    private String nomAsso;
 
     Bundle bundle;
+    private String nomAsso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

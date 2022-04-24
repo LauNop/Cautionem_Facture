@@ -14,11 +14,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -82,8 +84,21 @@ public class Membre_Activity extends AppCompatActivity {
     private void assemblageMembre() {
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        CollectionReference dbMembre = db.collection("Users").document(uid).collection("Assos").document(nomAsso).collection("Membres");
+        final String[] assoId = new String[1];
+        CollectionReference dbMembre = db.collection("Assos").document(assoId[0]).collection("Membres");
 
+
+        db
+                .collection("Users")
+                .document(uid).collection("Assos")
+                .document(nomAsso)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
+                    }
+                });
         dbMembre
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

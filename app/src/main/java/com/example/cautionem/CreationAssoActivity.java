@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CreationAssoActivity extends AppCompatActivity {
@@ -62,7 +63,9 @@ public class CreationAssoActivity extends AppCompatActivity {
 
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        CollectionReference dbAsso = db.collection("Users").document(uid).collection("Assos");
+
+        CollectionReference dbUserAsso = db.collection("Users").document(uid).collection("Assos");
+        CollectionReference dbAsso = db.collection("Assos");
 
 
         if (TextUtils.isEmpty(email)) {
@@ -77,9 +80,31 @@ public class CreationAssoActivity extends AppCompatActivity {
             ribEditText.requestFocus();
         }
         else{
+            //Génération d'un document à ID unique pour la collection Assos
+            DocumentReference addedDoc = dbAsso.document();
+            String idDoc = addedDoc.getId();
+
+            //Création des objets pour la structuration des documents
+            //Objet pour Users/"UserId"/Assos
+            User_Asso userAsso = new User_Asso(idDoc);
+            //Objet pour Assos
             Asso asso = new Asso(nomAsso,email,rib);
 
-            dbAsso.document(nomAsso).set(asso).addOnSuccessListener(new OnSuccessListener<Void>(){
+            //Ajout du doc dans la collection : Users/"UserId"/Assos
+            dbUserAsso.document(nomAsso).set(userAsso).addOnSuccessListener(new OnSuccessListener<Void>(){
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(CreationAssoActivity.this,"étape1 succès",Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(CreationAssoActivity.this, "étape1 échec:\n" + e, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            //Ajout du doc dans la collection : Assos
+            addedDoc.set(asso).addOnSuccessListener(new OnSuccessListener<Void>(){
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(CreationAssoActivity.this,"L'asso "+nomAsso+" a bien été enregistré",Toast.LENGTH_SHORT).show();
