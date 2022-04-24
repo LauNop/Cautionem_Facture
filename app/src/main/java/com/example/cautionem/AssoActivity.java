@@ -159,7 +159,6 @@ public class AssoActivity extends AppCompatActivity {
         String uid = user.getUid();
 
         CollectionReference dbUserAsso = db.collection("Users").document(uid).collection("Assos");
-        CollectionReference dbAsso = db.collection("Asso");
 
         //ArrayList de récupération d'Id
         ArrayList<String> assoId = new ArrayList<String>();
@@ -184,6 +183,7 @@ public class AssoActivity extends AppCompatActivity {
                     }
                 });
 
+        CollectionReference dbAsso = db.collection("Assos");
         //Récupération des assos de l'utilisateur dans la collection : Assos, selon les id récupérés dans l'ArrayList assoId
         dbAsso
                 .get()
@@ -192,6 +192,7 @@ public class AssoActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                Toast.makeText(AssoActivity.this,"Asso id : "+assoId.toString(), Toast.LENGTH_SHORT).show();
                                 if(assoId.contains(document.getId())) {
                                     Asso asso = document.toObject(Asso.class);
                                     AssoList.add(asso);

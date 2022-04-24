@@ -17,5 +17,10 @@ public class User_Asso {
     public String getId(){return id;}
 
     // --- SETTERS ---
-    public void setId(String nom){this.id=id;}
+    public void setId(String id){this.id=id;}
+
+    @Override
+    public String toString(){
+       return id;
+    }
 }
