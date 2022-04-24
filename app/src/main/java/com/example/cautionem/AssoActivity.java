@@ -159,7 +159,7 @@ public class AssoActivity extends AppCompatActivity {
         String uid = user.getUid();
 
         CollectionReference dbUserAsso = db.collection("Users").document(uid).collection("Assos");
-
+        CollectionReference dbAsso = db.collection("Assos");
         //ArrayList de récupération d'Id
         ArrayList<String> assoId = new ArrayList<String>();
 
@@ -176,31 +176,28 @@ public class AssoActivity extends AppCompatActivity {
                                 Toast.makeText(AssoActivity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                             }
-                        } else {
-                            Toast.makeText(AssoActivity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
-                            //Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-
-        CollectionReference dbAsso = db.collection("Assos");
-        //Récupération des assos de l'utilisateur dans la collection : Assos, selon les id récupérés dans l'ArrayList assoId
-        dbAsso
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Toast.makeText(AssoActivity.this,"Asso id : "+assoId.toString(), Toast.LENGTH_SHORT).show();
-                                if(assoId.contains(document.getId())) {
-                                    Asso asso = document.toObject(Asso.class);
-                                    AssoList.add(asso);
-                                    Toast.makeText(AssoActivity.this, document.getId() + " => " + document.getData(), Toast.LENGTH_SHORT).show();
-                                    //Log.d(TAG, document.getId() + " => " + document.getData());
-                                }
-                            }
-                            assoListView.setAdapter(new Asso_Adapter(AssoActivity.this, AssoList));
+                            //Récupération des assos de l'utilisateur dans la collection : Assos, selon les id récupérés dans l'ArrayList assoId
+                            dbAsso
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    if(assoId.contains(document.getId())) {
+                                                        Asso asso = document.toObject(Asso.class);
+                                                        AssoList.add(asso);
+                                                        Toast.makeText(AssoActivity.this, document.getId() + " => " + document.getData(), Toast.LENGTH_SHORT).show();
+                                                        //Log.d(TAG, document.getId() + " => " + document.getData());
+                                                    }
+                                                }
+                                                assoListView.setAdapter(new Asso_Adapter(AssoActivity.this, AssoList));
+                                            } else {
+                                                Toast.makeText(AssoActivity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
+                                                //Log.d(TAG, "Error getting documents: ", task.getException());
+                                            }
+                                        }
+                                    });
                         } else {
                             Toast.makeText(AssoActivity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
                             //Log.d(TAG, "Error getting documents: ", task.getException());
