@@ -85,7 +85,7 @@ public class Membre_Activity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
         final String[] assoId = new String[1];
-        CollectionReference dbMembre = db.collection("Assos").document(assoId[0]).collection("Membres");
+
 
 
         db
@@ -97,25 +97,26 @@ public class Membre_Activity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
-                    }
-                });
-        dbMembre
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Personne membre = document.toObject(Personne.class);
-                                PersonneList.add(membre);
-                                Toast.makeText(Membre_Activity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                            membreListView.setAdapter(new Personne_Adapter(Membre_Activity.this, PersonneList));
-                        } else {
-                            Toast.makeText(Membre_Activity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
-                            //Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
+                        CollectionReference dbMembre = db.collection("Assos").document(assoId[0]).collection("Membres");
+                        dbMembre
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                Personne membre = document.toObject(Personne.class);
+                                                PersonneList.add(membre);
+                                                Toast.makeText(Membre_Activity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
+                                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                            }
+                                            membreListView.setAdapter(new Personne_Adapter(Membre_Activity.this, PersonneList));
+                                        } else {
+                                            Toast.makeText(Membre_Activity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
+                                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                                        }
+                                    }
+                                });
                     }
                 });
     }

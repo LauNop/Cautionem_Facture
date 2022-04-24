@@ -70,7 +70,7 @@ public class Facture_Activity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
         final String[] assoId = new String[1];
-        CollectionReference dbFacture = db.collection("Assos").document(assoId[0]).collection("Factures");
+
 
 
         db
@@ -82,27 +82,29 @@ public class Facture_Activity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
+                        CollectionReference dbFacture = db.collection("Assos").document(assoId[0]).collection("Factures");
+                        dbFacture
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                Facture facture = document.toObject(Facture.class);
+                                                FactureList.add(facture);
+                                                Toast.makeText(Facture_Activity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
+                                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                            }
+                                            facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
+                                        } else {
+                                            Toast.makeText(Facture_Activity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
+                                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                                        }
+                                    }
+                                });
                     }
                 });
 
-        dbFacture
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Facture facture = document.toObject(Facture.class);
-                                FactureList.add(facture);
-                                Toast.makeText(Facture_Activity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                            facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
-                        } else {
-                            Toast.makeText(Facture_Activity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
-                            //Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+
     }
 }
