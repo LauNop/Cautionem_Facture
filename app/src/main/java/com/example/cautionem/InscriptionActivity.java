@@ -108,15 +108,12 @@ public class InscriptionActivity extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
                 // after the data addition is successful
                 // we are displaying a success toast message.
-                Toast.makeText(InscriptionActivity.this,"L'utilisateur "+uid+" a bien été enregistré",Toast.LENGTH_SHORT).show();
+                Log.d("createUser Success", "L'utilisateur "+uid+" a bien été enregistré");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // this method is called when the data addition process is failed.
-                // displaying a toast message when data addition is failed.
-                // Log.w(TAG, "Error adding document", e);
-                Toast.makeText(InscriptionActivity.this, "Erreur dans l'ajout de l'utilisateur \n" + e, Toast.LENGTH_SHORT).show();
+                Log.w("createUser Fail", "Erreur dans l'ajout de l'utilisateur", e);
             }
         });
     }

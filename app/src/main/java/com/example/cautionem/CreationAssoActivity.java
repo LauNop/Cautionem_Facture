@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -101,24 +102,24 @@ public class CreationAssoActivity extends AppCompatActivity {
             dbUserAsso.document(nomAsso).set(userAsso).addOnSuccessListener(new OnSuccessListener<Void>(){
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(CreationAssoActivity.this,"étape1 succès",Toast.LENGTH_SHORT).show();
+                    Log.d("addUserAssoDoc Success", "Document "+nomAsso+" ajouté");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(CreationAssoActivity.this, "étape1 échec:\n" + e, Toast.LENGTH_SHORT).show();
+                    Log.d("addUserAssoDoc Fail", "Echec : Ajout du Document "+nomAsso);
                 }
             });
 
-            //Ajout du doc dans la collection : Assos
+            //Ajout du document dans la collection : Assos
             addedDoc.set(asso).addOnSuccessListener(new OnSuccessListener<Void>(){
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(CreationAssoActivity.this,"L'asso "+nomAsso+" a bien été enregistré",Toast.LENGTH_SHORT).show();
-
+                    Log.d("addAssoDoc Success", "Document "+nomAsso+" ajouté");
                     userDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            Log.d("getUser Success", "Les informations du nouveau membre ont été récupérés");
                             User user = documentSnapshot.toObject(User.class);
                             membre[0] = new Membre(user.getPrénom(),user.getNom(),Membre.R1);
 
@@ -129,11 +130,12 @@ public class CreationAssoActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(CreationAssoActivity.this,"Le nouveau membre  a bien été enregistré",Toast.LENGTH_SHORT).show();
+                                    Log.d("addMembre Success", "Le nouveau membre "+user.getPrénom()+" "+user.getNom()+"  a bien été enregistré");
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(CreationAssoActivity.this, "Erreur dans l'ajout de l'utilisateur \n" + e, Toast.LENGTH_SHORT).show();
+                                    Log.d("addMembre Fail", "Echec : Ajout du nouveau membre"+user.getPrénom()+" "+user.getNom());
                                 }
                             });
                         }
@@ -149,7 +151,7 @@ public class CreationAssoActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(CreationAssoActivity.this, "Erreur dans l'ajout de l'utilisateur \n" + e, Toast.LENGTH_SHORT).show();
+                    Log.d("addAssoDoc Fail", "Echec : Ajout du Document "+nomAsso);
                 }
             });
         }

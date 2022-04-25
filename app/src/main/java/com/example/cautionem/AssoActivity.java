@@ -4,6 +4,7 @@ import static com.example.cautionem.R.id.Asso_list;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -173,8 +174,7 @@ public class AssoActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 User_Asso userAsso = document.toObject(User_Asso.class);
                                 assoId.add(userAsso.getId());
-                                Toast.makeText(AssoActivity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                Log.d("getAssoId Success", document.getId() + " => " + document.getData());
                             }
                             //Récupération des assos de l'utilisateur dans la collection : Assos, selon les id récupérés dans l'ArrayList assoId
                             dbAsso
@@ -187,20 +187,18 @@ public class AssoActivity extends AppCompatActivity {
                                                     if(assoId.contains(document.getId())) {
                                                         Asso asso = document.toObject(Asso.class);
                                                         AssoList.add(asso);
-                                                        Toast.makeText(AssoActivity.this, document.getId() + " => " + document.getData(), Toast.LENGTH_SHORT).show();
-                                                        //Log.d(TAG, document.getId() + " => " + document.getData());
+                                                        Log.d("getAssos Success", document.getId() + " => " + document.getData());
                                                     }
                                                 }
                                                 assoListView.setAdapter(new Asso_Adapter(AssoActivity.this, AssoList));
                                             } else {
-                                                Toast.makeText(AssoActivity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
-                                                //Log.d(TAG, "Error getting documents: ", task.getException());
+                                                Log.d("getAssos Fail", "Error getting documents: ", task.getException());
                                             }
                                         }
                                     });
                         } else {
                             Toast.makeText(AssoActivity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
-                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                            Log.d("getAssoId Fail", "Error getting documents: ", task.getException());
                         }
                     }
                 });

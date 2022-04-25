@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -70,11 +71,13 @@ public class InfosActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                        assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
+                        Log.d("getAssoId Success", "Récupération de l'Id : "+assoId[0]);
                         DocumentReference docRef = db.collection("Assos").document(assoId[0]);
 
                         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                Log.d("getAssoDoc Success", "Récupération des informations de l'asso "+nomAsso);
                                 Asso asso = documentSnapshot.toObject(Asso.class);
                                 nAEditText.setText(asso.getNom());
                                 emailEditText.setText(asso.getEmail());

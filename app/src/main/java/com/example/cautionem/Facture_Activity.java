@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -81,6 +82,7 @@ public class Facture_Activity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Log.d("getAssoId Success", "Récupération de l'"+documentSnapshot.getData()+" de l'Asso "+documentSnapshot.getId());
                         assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
                         CollectionReference dbFacture = db.collection("Assos").document(assoId[0]).collection("Factures");
                         dbFacture
@@ -88,17 +90,16 @@ public class Facture_Activity extends AppCompatActivity {
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        Log.d("accessCollectionFacture Success", "");
                                         if (task.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task.getResult()) {
                                                 Facture facture = document.toObject(Facture.class);
                                                 FactureList.add(facture);
-                                                Toast.makeText(Facture_Activity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
-                                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                                Log.d("getFactureDoc Success", document.getId() + " => " + document.getData());
                                             }
                                             facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
                                         } else {
-                                            Toast.makeText(Facture_Activity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
-                                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                                            Log.d("getAllFactureDoc Fail", "");
                                         }
                                     }
                                 });

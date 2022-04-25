@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,21 +79,20 @@ public class Inscription2Activity extends AppCompatActivity {
             nomEditText.requestFocus();
         }
         else{
-            DocumentReference washingtonRef = db.collection("Users").document(uid);
+            DocumentReference docRef = db.collection("Users").document(uid);
 
-// Set the "isCapital" field of the city 'DC'
-            washingtonRef
+            docRef
                     .update("prénom", prénom,"nom",nom)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(Inscription2Activity.this,"DocumentSnapshot successfully updated!",Toast.LENGTH_SHORT).show();
+                            Log.d("updateUserDoc Success", "DocumentSnapshot successfully updated!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Inscription2Activity.this,"Error updating document",Toast.LENGTH_SHORT).show();
+                            Log.d("updateUserDoc Success", "Error updating document");
                         }
                     });
             startActivity(new Intent(getApplicationContext(),AssoActivity.class));
