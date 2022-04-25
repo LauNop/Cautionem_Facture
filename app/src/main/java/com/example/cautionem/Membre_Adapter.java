@@ -1,7 +1,6 @@
 package com.example.cautionem;
 
 import android.annotation.SuppressLint;
-import android.app.Person;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,31 +9,30 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Personne_Adapter extends BaseAdapter {
+public class Membre_Adapter extends BaseAdapter {
 
     //  Infos
     private Context context;
-    private ArrayList<Personne>  personneList;
+    private ArrayList<Membre> membreList;
     private LayoutInflater inflater;
 
     //  Constructeur
-    public Personne_Adapter(Context context, ArrayList<Personne> personneList) {
+    public Membre_Adapter(Context context, ArrayList<Membre> membreList) {
         this.context = context;
-        this.personneList = personneList;
+        this.membreList = membreList;
         this.inflater = LayoutInflater.from(context);
     }
 
 
     @Override
     public int getCount() {
-        return personneList.size();
+        return membreList.size();
     }
 
     @Override
-    public Personne getItem(int position) {
-        return personneList.get(position);
+    public Membre getItem(int position) {
+        return membreList.get(position);
     }
 
     @Override
@@ -50,7 +48,7 @@ public class Personne_Adapter extends BaseAdapter {
         view = inflater.inflate(R.layout.adapter_membre, null);
 
         //  Infos du membre
-        Personne currentItem = getItem(i);
+        Membre currentItem = getItem(i);
 
         //  Récupération du role
         TextView roleView = view.findViewById(R.id.role_membre);
@@ -58,7 +56,7 @@ public class Personne_Adapter extends BaseAdapter {
 
         //  Récupération pseudo
         TextView pseudoView = view.findViewById(R.id.pseudo_membre);
-        pseudoView.setText(currentItem.getPseudo());
+        pseudoView.setText(currentItem.getPrénom()+" "+currentItem.getNom());
 
         return view;
     }
