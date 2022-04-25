@@ -70,21 +70,18 @@ public class InfosActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                        assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
+                        DocumentReference docRef = db.collection("Assos").document(assoId[0]);
+
+                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                Asso asso = documentSnapshot.toObject(Asso.class);
+                                nAEditText.setText(asso.getNom());
+                                emailEditText.setText(asso.getEmail());
+                                ribEditText.setText(asso.getRIB());
+                            }
+                        });
                     }
                 });
-
-        DocumentReference docRef = db.collection("Assos").document(assoId[0]);
-
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Asso asso = documentSnapshot.toObject(Asso.class);
-                nAEditText.setText(asso.getNom());
-                emailEditText.setText(asso.getEmail());
-                ribEditText.setText(asso.getRIB());
-            }
-        });
-
-
     }
 }
