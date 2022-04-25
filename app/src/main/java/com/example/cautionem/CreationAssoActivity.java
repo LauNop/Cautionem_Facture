@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CreationAssoActivity extends AppCompatActivity {
@@ -82,6 +83,7 @@ public class CreationAssoActivity extends AppCompatActivity {
         else{
             //Génération d'un document à ID unique pour la collection Assos
             DocumentReference addedDoc = dbAsso.document();
+            DocumentReference userDocRef = db.collection("Users").document(uid);
             String idDoc = addedDoc.getId();
 
             //Création des objets pour la structuration des documents
@@ -89,8 +91,13 @@ public class CreationAssoActivity extends AppCompatActivity {
             User_Asso userAsso = new User_Asso(idDoc);
             //Objet pour Assos
             Asso asso = new Asso(nomAsso,email,rib);
+            //Objet pour Assos/"AssoId"/Membres
+            final Membre[] membre = new Membre[1];
 
-            //Ajout du doc dans la collection : Users/"UserId"/Assos
+
+
+
+            //Ajout du document dans la collection : Users/"UserId"/Assos
             dbUserAsso.document(nomAsso).set(userAsso).addOnSuccessListener(new OnSuccessListener<Void>(){
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -108,6 +115,29 @@ public class CreationAssoActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(CreationAssoActivity.this,"L'asso "+nomAsso+" a bien été enregistré",Toast.LENGTH_SHORT).show();
+
+                    userDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            User user = documentSnapshot.toObject(User.class);
+                            membre[0] = new Membre(user.getPrénom(),user.getNom(),Membre.R1);
+
+                            addedDoc
+                                    .collection("Membres")
+                                    .document(uid)
+                                    .set(membre[0]).addOnSuccessListener(new OnSuccessListener<Void>(){
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(CreationAssoActivity.this,"Le nouveau membre  a bien été enregistré",Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(CreationAssoActivity.this, "Erreur dans l'ajout de l'utilisateur \n" + e, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
 
                     Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
                     bundle = new Bundle();

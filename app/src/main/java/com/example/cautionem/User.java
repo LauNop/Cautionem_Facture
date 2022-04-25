@@ -10,6 +10,9 @@ public class User {
     @Nullable
     private String urlPicture;
 
+    public User(){
+
+    }
 
     public User(String uid,String email) {
         this.uid = uid;
