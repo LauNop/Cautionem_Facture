@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -99,13 +100,11 @@ public class Membre_Activity extends AppCompatActivity {
                                             for (QueryDocumentSnapshot document : task.getResult()) {
                                                 Membre membre = document.toObject(Membre.class);
                                                 MembreList.add(membre);
-                                                Toast.makeText(Membre_Activity.this,document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
-                                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                                Log.d("getMembre Success", document.getId() + " => " + document.getData());
                                             }
                                             membreListView.setAdapter(new Membre_Adapter(Membre_Activity.this, MembreList));
                                         } else {
-                                            Toast.makeText(Membre_Activity.this,"Error getting documents: "+ task.getException(),Toast.LENGTH_SHORT).show();
-                                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                                            Log.d("getMembre Fail", "Error getting documents: ", task.getException());
                                         }
                                     }
                                 });
