@@ -15,14 +15,24 @@ import android.widget.Toast;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
     Context context;
     File[] filesAndFolders;
+    FirebaseStorage storage;
 
     public MyAdapter(Context context, File[] filesAndFolders){
         this.context = context;
@@ -34,6 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.recycler_item,parent,false);
+        storage = FirebaseStorage.getInstance();
         return new ViewHolder(view);
     }
 
@@ -43,6 +54,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         File selectedFile = filesAndFolders[position];
         holder.textView.setText(selectedFile.getName());
 
+        // Create a storage reference from our app
+        StorageReference storageRef = storage.getReference();
+        // Create a child reference
+        // imagesRef now points to "images"
+        StorageReference factureRef = storageRef.child("factures");
+        StorageReference facture1Ref = factureRef.child("facture_1.pdf");
         if(selectedFile.isDirectory()){
             holder.imageView.setImageResource(R.drawable.ic_baseline_folder_24);
         }else{
@@ -59,8 +76,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }else{
-                    //open the file
+                    InputStream stream = null;
                     try {
+                        stream = new FileInputStream(new File(selectedFile.getAbsolutePath()));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    UploadTask uploadTask = facture1Ref.putStream(stream);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                            // ...
+                        }
+                    });
+                    //open the file
+                    /*try {
                         //Ouvrir avec un pdf
                         Intent intent = new Intent();
                         intent.setAction(android.content.Intent.ACTION_VIEW);
@@ -70,7 +107,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                         context.startActivity(intent);
                     }catch (Exception e){
                         Toast.makeText(context.getApplicationContext(),"Cannot open the file",Toast.LENGTH_SHORT).show();
-                    }
+                    }*/
                 }
             }
         });
