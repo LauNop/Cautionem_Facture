@@ -59,8 +59,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }else{
-                    //open thte file
+                    //open the file
                     try {
+                        //Ouvrir avec un pdf
                         Intent intent = new Intent();
                         intent.setAction(android.content.Intent.ACTION_VIEW);
                         String type = "image/*";
@@ -94,10 +95,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                             }
                         }
                         if(item.getTitle().equals("MOVE")){
+
                             Toast.makeText(context.getApplicationContext(),"MOVED ",Toast.LENGTH_SHORT).show();
 
                         }
                         if(item.getTitle().equals("RENAME")){
+
                             Toast.makeText(context.getApplicationContext(),"RENAME ",Toast.LENGTH_SHORT).show();
 
                         }

@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -54,7 +55,7 @@ public class Facture_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facture);
 
-        MaterialButton storageBtn = findViewById(R.id.storage_btn);
+        FloatingActionButton storageBtn = findViewById(R.id.storage_btn);
 
         storageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
