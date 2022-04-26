@@ -6,6 +6,14 @@ import static com.example.cautionem.R.id.Membre_list;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Environment;
+import android.view.View;
+import com.google.android.material.button.MaterialButton;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +23,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,7 +54,26 @@ public class Facture_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facture);
 
-       facturelistView = findViewById(Facture_list);
+        MaterialButton storageBtn = findViewById(R.id.storage_btn);
+
+        storageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkPermission()){
+                    //permission allowed
+                    Intent intent = new Intent(Facture_Activity.this, FileListActivity.class);
+                    String path = Environment.getExternalStorageDirectory().getPath();
+                    intent.putExtra("path",path);
+                    startActivity(intent);
+                }else{
+                    //permission not allowed
+                    requestPermission();
+
+                }
+            }
+        });
+
+        facturelistView = findViewById(Facture_list);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -59,6 +87,23 @@ public class Facture_Activity extends AppCompatActivity {
 
         assemblageFacture();
     }
+
+
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(Facture_Activity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if(result == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }else
+            return false;
+    }
+
+    private void requestPermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(Facture_Activity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            Toast.makeText(Facture_Activity.this,"Storage permission is requires,please allow from settings",Toast.LENGTH_SHORT).show();
+        }else
+            ActivityCompat.requestPermissions(Facture_Activity.this,new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},111);
+    }
+
 
     @Override
     public void onBackPressed(){
