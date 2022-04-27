@@ -3,91 +3,348 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_gravity="center"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Photo_Activity">
 
-    <androidx.cardview.widget.CardView
-        android:elevation="5dp"
-        app:cardCornerRadius="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
         <RadioGroup
             android:id="@+id/radioGroup"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="match_parent">
 
-            <RadioButton
-                android:id="@+id/profil1"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:checked="true"
-                android:onClick="onAlignmentSelected"
-                android:background="@drawable/alignment_selector"
-                android:button="@drawable/profil1"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/profil2"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/alignment_selector"
-                android:button="@drawable/profil2"
-                android:onClick="onAlignmentSelected"
-                tools:ignore="DuplicateSpeakableTextCheck" />
+                <RadioButton
+                    android:id="@+id/profil1"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:checked="true"
+                    android:onClick="onAlignmentSelected"
+                    android:scaleType="centerCrop"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView1"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cardBackgroundColor="#0B2FF4"
+                    app:cardCornerRadius="250dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
-            <RadioButton
-                android:id="@+id/profil3"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/alignment_selector"
-                android:button="@drawable/profil3"
-                android:onClick="onAlignmentSelected" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
 
-            <RadioButton
-                android:id="@+id/profil4"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/alignment_selector"
-                android:button="@drawable/profil4"
-                android:onClick="onAlignmentSelected" />
+                        <ImageView
+                            android:id="@+id/profil_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profil1"
+                            android:contentDescription="@string/todo" />
 
-            <RadioButton
-                android:id="@+id/profil5"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/alignment_selector"
-                android:button="@drawable/profil5"
-                android:onClick="onAlignmentSelected" />
+                    </androidx.cardview.widget.CardView>
 
-            <RadioButton
-                android:id="@+id/profil6"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/alignment_selector"
-                android:button="@drawable/profil6"
-                android:onClick="onAlignmentSelected" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/profil7"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/alignment_selector"
-                android:button="@drawable/profil7"
-                android:onClick="onAlignmentSelected" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/profil8"
-                android:layout_width="48dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/alignment_selector"
-                android:button="@drawable/profil8"
-                android:onClick="onAlignmentSelected" />
+                <RadioButton
+                    android:id="@+id/profil2"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+
+                    android:onClick="onAlignmentSelected"
+                    android:scaleType="centerCrop"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cardBackgroundColor="#0B2FF4"
+                    app:cardCornerRadius="250dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
+
+                        <ImageView
+                            android:id="@+id/profil_image2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profil2"
+                            android:contentDescription="@string/todo" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/profil3"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+
+                    android:onClick="onAlignmentSelected"
+                    android:scaleType="centerCrop"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView3"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cardBackgroundColor="#0B2FF4"
+                    app:cardCornerRadius="250dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
+
+                        <ImageView
+                            android:id="@+id/profil_image3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profil3"
+                            android:contentDescription="@string/todo" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/profil4"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+
+                    android:onClick="onAlignmentSelected"
+                    android:scaleType="centerCrop"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView4"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cardBackgroundColor="#0B2FF4"
+                    app:cardCornerRadius="250dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
+
+                        <ImageView
+                            android:id="@+id/profil_image4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profil4"
+                            android:contentDescription="@string/todo" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/profil5"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+
+                    android:onClick="onAlignmentSelected"
+                    android:scaleType="centerCrop"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView5"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cardBackgroundColor="#0B2FF4"
+                    app:cardCornerRadius="250dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
+
+                        <ImageView
+                            android:id="@+id/profil_image5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profil5"
+                            android:contentDescription="@string/todo" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/profil6"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+
+                    android:onClick="onAlignmentSelected"
+                    android:scaleType="centerCrop"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView6"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cardBackgroundColor="#0B2FF4"
+                    app:cardCornerRadius="250dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
+
+                        <ImageView
+                            android:id="@+id/profil_image6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profil6"
+                            android:contentDescription="@string/todo" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/profil7"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+
+                    android:onClick="onAlignmentSelected"
+                    android:scaleType="centerCrop"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView7"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cardBackgroundColor="#0B2FF4"
+                    app:cardCornerRadius="250dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
+
+                        <ImageView
+                            android:id="@+id/profil_image7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profil7"
+                            android:contentDescription="@string/todo" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/profil8"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+
+                    android:onClick="onAlignmentSelected"
+                    android:scaleType="centerCrop"
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView8"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    app:cardBackgroundColor="#0B2FF4"
+                    app:cardCornerRadius="250dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
+
+                        <ImageView
+                            android:id="@+id/profil_image8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profil8"
+                            android:contentDescription="@string/todo" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
 
 
         </RadioGroup>
 
-    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
