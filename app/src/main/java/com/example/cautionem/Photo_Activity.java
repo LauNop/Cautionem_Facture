@@ -2,17 +2,30 @@ package com.example.cautionem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class Photo_Activity extends AppCompatActivity {
+    private Button valider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
+
+        this.valider = (Button) findViewById(R.id.valid_buton);
+
+        valider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Inscription2Activity.class));
+                finish();
+            }
+        });
     }
 
     public void onAlignmentSelected(View view) {
@@ -45,4 +58,6 @@ public class Photo_Activity extends AppCompatActivity {
 
         }
     }
+
+
 }
