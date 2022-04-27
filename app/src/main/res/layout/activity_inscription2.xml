@@ -120,6 +120,7 @@
         android:layout_marginStart="10dp"
         android:clickable="true"
         android:contentDescription="modifier image de profil"
+        android:focusableInTouchMode="true"
         android:minWidth="48dp"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"

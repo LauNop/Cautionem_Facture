@@ -3,6 +3,7 @@ package com.example.cautionem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,11 +29,13 @@ public class Inscription2Activity extends AppCompatActivity {
     private EditText prénomEditText;
     private EditText nomEditText;
     private Button next;
+    private ImageView profil;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     FirebaseStorage storage;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +44,20 @@ public class Inscription2Activity extends AppCompatActivity {
         this.next = (Button) findViewById(R.id.nextbut);
         this.prénomEditText = findViewById(R.id.prénomInput);
         this.nomEditText = findViewById(R.id.nomInput);
+        this.profil = (ImageView) findViewById(R.id.imagePen);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
+
+
+        profil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Photo_Activity.class));
+                finish();
+            }
+        });
 
 
         next.setOnClickListener(new View.OnClickListener() {

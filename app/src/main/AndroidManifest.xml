@@ -20,6 +20,9 @@
             android:name=".AssoActivity"
             android:exported="false" />
         <activity
+            android:name=".Photo_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Membre_Activity"
             android:exported="false" />
         <activity
