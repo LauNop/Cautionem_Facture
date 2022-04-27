@@ -76,7 +76,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }else{
-                    InputStream stream = null;
+                   /* InputStream stream = null;
                     try {
                         stream = new FileInputStream(new File(selectedFile.getAbsolutePath()));
                     } catch (FileNotFoundException e) {
@@ -95,9 +95,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                             // ...
                         }
-                    });
+                    });*/
                     //open the file
-                    /*try {
+                    try {
                         //Ouvrir avec un pdf
                         Intent intent = new Intent();
                         intent.setAction(android.content.Intent.ACTION_VIEW);
@@ -107,7 +107,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                         context.startActivity(intent);
                     }catch (Exception e){
                         Toast.makeText(context.getApplicationContext(),"Cannot open the file",Toast.LENGTH_SHORT).show();
-                    }*/
+                    }
                 }
             }
         });
