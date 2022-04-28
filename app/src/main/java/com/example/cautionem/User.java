@@ -7,16 +7,17 @@ public class User {
     private String prénom;
     private String nom;
     private String email;
-    @Nullable
-    private String urlPicture;
+    private int numPicture;
 
     public User(){
+        this.numPicture = 0;
 
     }
 
     public User(String uid,String email) {
         this.uid = uid;
         this.email = email;
+        this.numPicture = 0;
     }
 
     // --- GETTERS ---
@@ -24,14 +25,13 @@ public class User {
     public String getPrénom() { return prénom; }
     public String getNom() { return nom; }
     public String getEmail() { return email; }
-    @Nullable
-    public String getUrlPicture() { return urlPicture; }
+    public int getNumPicture() { return numPicture; }
 
     // --- SETTERS ---
     public void setUid(String uid) { this.uid = uid; }
     public void setUsername(String prénom) { this.prénom = prénom; }
     public void setNom(String nom) { this.nom = nom; }
     public void setEmail(String email) {this.email = email;}
-    public void setUrlPicture(@Nullable String urlPicture) { this.urlPicture = urlPicture; }
+    public void setNumPicture(int numPicture) { this.numPicture = numPicture; }
 
 }

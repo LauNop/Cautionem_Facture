@@ -6,13 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,10 +30,14 @@ public class Inscription2Activity extends AppCompatActivity {
     private EditText nomEditText;
     private Button next;
     private ImageView profil;
+    private ImageView thepen;
+    private int idNumPhoto;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     FirebaseStorage storage;
+
+    Bundle bundle;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -44,14 +48,58 @@ public class Inscription2Activity extends AppCompatActivity {
         this.next = (Button) findViewById(R.id.nextbut);
         this.prénomEditText = findViewById(R.id.prénomInput);
         this.nomEditText = findViewById(R.id.nomInput);
-        this.profil = (ImageView) findViewById(R.id.imagePen);
+        this.thepen = (ImageView) findViewById(R.id.imagePen);
+        this.profil = (ImageView) findViewById(R.id.profil_image);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
 
+        Intent intent = getIntent();
 
-        profil.setOnClickListener(new View.OnClickListener() {
+        if(intent !=null)
+        {
+            if(intent.hasExtra("key1"))
+            {
+                bundle = getIntent().getExtras();
+                idNumPhoto = bundle.getInt("key1", 0);
+            }
+            else{
+                    idNumPhoto = 0;
+                }
+        }
+
+        switch(idNumPhoto){
+            case 0:
+                profil.setImageResource(R.drawable.ic_lambda_profile);
+                break;
+            case 1:
+                profil.setImageResource(R.drawable.profil1);
+                break;
+            case 2:
+                profil.setImageResource(R.drawable.profil2);
+                break;
+            case 3:
+                profil.setImageResource(R.drawable.profil3);
+                break;
+            case 4:
+                profil.setImageResource(R.drawable.profil4);
+                break;
+            case 5:
+                profil.setImageResource(R.drawable.profil5);
+                break;
+            case 6:
+                profil.setImageResource(R.drawable.profil6);
+                break;
+            case 7:
+                profil.setImageResource(R.drawable.profil7);
+                break;
+            case 8:
+                profil.setImageResource(R.drawable.profil8);
+                break;
+        }
+
+        thepen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), Photo_Activity.class));
@@ -96,7 +144,7 @@ public class Inscription2Activity extends AppCompatActivity {
             DocumentReference docRef = db.collection("Users").document(uid);
 
             docRef
-                    .update("prénom", prénom,"nom",nom)
+                    .update("prénom", prénom,"nom",nom,"numPicture",idNumPhoto)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
