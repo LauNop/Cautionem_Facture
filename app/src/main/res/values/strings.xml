@@ -43,4 +43,6 @@
     <string name="nom_facture">Nom facture</string>
     <string name="telecharger">Télécharger</string>
     <string name="save">Enregistrer</string>
+
+    <string name="hyperlink"><a href="https://cautionem.page.link/signIn">Test</a></string>
 </resources>

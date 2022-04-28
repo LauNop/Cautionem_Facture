@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,6 +40,15 @@ public class InfosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infos);
+
+        // Text view number 1 to add hyperlink
+        TextView linkTextView = findViewById(R.id.textView6);
+
+        // method to redirect to provided link
+        linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
+
+        // method to change color of link
+        linkTextView.setLinkTextColor(Color.YELLOW);
 
         this.nAEditText = findViewById(R.id.nomAssoPlace);
         this.emailEditText = findViewById(R.id.emailPlace);
