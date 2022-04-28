@@ -64,9 +64,9 @@ public class Membre_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("label","Le futur lien");
+                ClipData clip = ClipData.newPlainText("label","https://cautionem.page.link/signIn");
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(Membre_Activity.this, "Création lien", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Membre_Activity.this, "Lien copié", Toast.LENGTH_SHORT).show();
             }
         });
 

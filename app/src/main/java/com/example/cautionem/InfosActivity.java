@@ -48,7 +48,7 @@ public class InfosActivity extends AppCompatActivity {
         linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
         // method to change color of link
-        linkTextView.setLinkTextColor(Color.YELLOW);
+        linkTextView.setLinkTextColor(Color.BLUE);
 
         this.nAEditText = findViewById(R.id.nomAssoPlace);
         this.emailEditText = findViewById(R.id.emailPlace);
