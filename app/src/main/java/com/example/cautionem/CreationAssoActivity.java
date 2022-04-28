@@ -121,7 +121,7 @@ public class CreationAssoActivity extends AppCompatActivity {
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             Log.d("getUser Success", "Les informations du nouveau membre ont été récupérés");
                             User user = documentSnapshot.toObject(User.class);
-                            membre[0] = new Membre(user.getPrénom(),user.getNom(),Membre.R1);
+                            membre[0] = new Membre(user.getPrénom(),user.getNom(),Membre.R1,user.getNumPicture());
 
                             addedDoc
                                     .collection("Membres")
