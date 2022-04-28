@@ -91,7 +91,7 @@
         android:autofillHints="@string/prompt_RIB"
         android:ems="10"
         android:hint="@string/prompt_RIB"
-        android:inputType="textPassword"
+        android:inputType="textLongMessage"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/nextbut3"
         app:layout_constraintEnd_toEndOf="parent"
