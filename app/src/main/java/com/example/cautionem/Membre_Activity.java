@@ -5,6 +5,9 @@ import static com.example.cautionem.R.id.Membre_list;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,6 +63,9 @@ public class Membre_Activity extends AppCompatActivity {
         lien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("label","Le futur lien");
+                clipboard.setPrimaryClip(clip);
                 Toast.makeText(Membre_Activity.this, "Création lien", Toast.LENGTH_SHORT).show();
             }
         });
