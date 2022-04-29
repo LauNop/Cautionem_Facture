@@ -91,7 +91,7 @@ public class CreationAssoActivity extends AppCompatActivity {
             //Objet pour Users/"UserId"/Assos
             User_Asso userAsso = new User_Asso(idDoc);
             //Objet pour Assos
-            Asso asso = new Asso(nomAsso,email,rib);
+            Asso asso = new Asso(nomAsso,email,rib,idDoc);
             //Objet pour Assos/"AssoId"/Membres
             final Membre[] membre = new Membre[1];
 

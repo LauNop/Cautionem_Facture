@@ -24,6 +24,7 @@ public class SuiviActivity extends AppCompatActivity {
 
     Bundle bundle;
     private String nomAsso;
+    private String assoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,8 @@ public class SuiviActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         bundle = getIntent().getExtras();
-        nomAsso = bundle.getString("key1","Default");
+        nomAsso = bundle.getString("key1");
+        assoId = bundle.getString("key2");
         this.nA.setText(nomAsso);
 
         info.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +74,7 @@ public class SuiviActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Membre_Activity.class);
                 bundle = new Bundle();
                 bundle.putString("key1",nomAsso);
+                bundle.putString("key2",assoId);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();

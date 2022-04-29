@@ -39,6 +39,7 @@ public class Membre_Activity extends AppCompatActivity {
 
     private ArrayList<Membre> MembreList = new ArrayList<Membre>();
     private String nomAsso;
+    private String assoId;
     private ListView membreListView;
     FloatingActionButton lien;
 
@@ -59,7 +60,8 @@ public class Membre_Activity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         bundle = getIntent().getExtras();
-        nomAsso = bundle.getString("key1","Default");
+        nomAsso = bundle.getString("key1");
+        assoId = bundle.getString("key2");
 
         assemblageMembre();
 
@@ -68,7 +70,7 @@ public class Membre_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
-                        .setLink(Uri.parse("https://www.asso.com/"))
+                        .setLink(Uri.parse("https://www.asso.com/?assoId="+assoId+"&nomAsso="+nomAsso))
                         .setDomainUriPrefix("https://cautionem.page.link")
                         // Open links with this app on Android
                         .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())

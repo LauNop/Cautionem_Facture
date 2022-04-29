@@ -7,6 +7,7 @@ public class Membre {
     final static String R2 = "Vice-président";
     final static String R3 = "Trésorier";
     final static String R4 = "Secrétaire";
+    final static String R5 = "Membre";
     private String prénom;
     private String nom;
     private String role;

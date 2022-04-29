@@ -30,6 +30,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -105,6 +107,7 @@ public class AssoActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
                 bundle = new Bundle();
                 bundle.putString("key1",AssoList.get(i).getNom());
+                bundle.putString("key2",AssoList.get(i).getAssoId());
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
@@ -118,7 +121,7 @@ public class AssoActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<PendingDynamicLinkData>() {
                     @Override
                     public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-                        Log.i("AssoActivity","Nous avons un lien dynamique");
+                        Log.d("AssoActivity","Nous avons un lien dynamique");
                         Uri deeplink = null;
 
                         if(pendingDynamicLinkData!=null){
@@ -126,15 +129,74 @@ public class AssoActivity extends AppCompatActivity {
                         }
 
                         if(deeplink!=null){
-                            Log.i("AssoActivity","Voici le lien dynamique \n" + deeplink.toString());
-                        }
+                            Log.d("AssoActivity","Voici le lien dynamique \n" + deeplink.toString());
+                            Toast.makeText(AssoActivity.this, "Voici le lien dynamique \n" + deeplink.toString(), Toast.LENGTH_SHORT).show();
+                            String assoId = deeplink.getQueryParameter("assoId");
+                            String nomAsso = deeplink.getQueryParameter("nomAsso");
+                            Log.d("AssoActivity","Voici les paramètres :\n" +"assoId :"+assoId+"\n"+"nomAsso :"+nomAsso);
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AssoActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String uid = user.getUid();
+
+                            CollectionReference dbUserAsso = db.collection("Users").document(uid).collection("Assos");
+                            CollectionReference dbAsso = db.collection("Assos");
+
+                            //Récupération du document de l'asso
+                            DocumentReference assoDocRef = dbAsso.document(assoId);
+                            DocumentReference userDocRef = db.collection("Users").document(uid);
+
+                            //Création des objets pour la structuration des documents
+                            //Objet pour Users/"UserId"/Assos
+                            User_Asso userAsso = new User_Asso(assoId);
+                            //Objet pour Assos/"AssoId"/Membres
+                            final Membre[] membre = new Membre[1];
+
+
+
+
+                            //Ajout du document dans la collection : Users/"UserId"/Assos
+                            dbUserAsso.document(nomAsso).set(userAsso).addOnSuccessListener(new OnSuccessListener<Void>(){
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("addUserAssoDoc Success", "Document "+nomAsso+" ajouté");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("addUserAssoDoc Fail", "Echec : Ajout du Document "+nomAsso);
+                                }
+                            });
+
+                            //Récupération des information du nouveau membre
+                                    userDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            Log.d("getUser Success", "Les informations du nouveau membre ont été récupérés");
+                                            User user = documentSnapshot.toObject(User.class);
+                                            membre[0] = new Membre(user.getPrénom(),user.getNom(),Membre.R5,user.getNumPicture());
+
+                                            //Ajout de l'utilisateur dans les membres de l'asso
+                                            assoDocRef
+                                                    .collection("Membres")
+                                                    .document(uid)
+                                                    .set(membre[0]).addOnSuccessListener(new OnSuccessListener<Void>(){
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(AssoActivity.this,"Le nouveau membre  a bien été enregistré",Toast.LENGTH_SHORT).show();
+                                                    Log.d("addMembre Success", "Le nouveau membre "+user.getPrénom()+" "+user.getNom()+"  a bien été enregistré");
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.d("addMembre Fail", "Echec : Ajout du nouveau membre"+user.getPrénom()+" "+user.getNom());
+                                                }
+                                            });
+                                        }
+                                    });
+                        }
+                        else{
+                            Log.d("BIG FAIL", "THE FAIL");
+                        }
 
                     }
                 });
