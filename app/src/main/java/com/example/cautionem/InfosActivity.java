@@ -6,16 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,8 +31,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class InfosActivity extends AppCompatActivity {
 
     private EditText nAEditText, emailEditText, ribEditText;
-    private Button share;
-    private String nomAsso;
+    private Button savebtn;
+    private String nomAsso,assoId;
+    private boolean nABool, emailBool,ribBool;
 
 
     FirebaseFirestore db;
@@ -53,15 +59,132 @@ public class InfosActivity extends AppCompatActivity {
         this.nAEditText = findViewById(R.id.nomAssoPlace);
         this.emailEditText = findViewById(R.id.emailPlace);
         this.ribEditText = findViewById(R.id.ribPlace);
-        this.share = (Button) findViewById(R.id.savebtn);
+        this.savebtn = (Button) findViewById(R.id.savebtn);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
         bundle = getIntent().getExtras();
-        nomAsso = bundle.getString("key1","Default");
+        nomAsso = bundle.getString("key1");
+        assoId = bundle.getString("key2");
 
+        savebtn.setEnabled(false);
+        nABool= false;
+        emailBool = false;
+        ribBool = false;
         setUpInfo();
+
+
+        nAEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(nABool) {
+                    savebtn.setEnabled(true);
+                    Log.d("EditText InfosActivity", "It changed");
+                }
+                else{
+                    nABool = true;
+                }
+            }
+        });
+
+        emailEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(emailBool) {
+                    savebtn.setEnabled(true);
+                    Log.d("EditText InfosActivity", "It changed");
+                }
+                else{
+                    emailBool = true;
+                }
+            }
+        });
+
+        ribEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(ribBool) {
+                    savebtn.setEnabled(true);
+                    Log.d("EditText InfosActivity", "It changed");
+                }
+                else{
+                    ribBool = true;
+                }
+            }
+        });
+
+        savebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nom = nAEditText.getText().toString();
+                String email = emailEditText.getText().toString();
+                String rib = ribEditText.getText().toString();
+
+                if(TextUtils.isEmpty(nom)){
+                    nAEditText.setError("Le champ 'Prénom' ne peut pas être vide");
+                    nAEditText.requestFocus();
+                }
+                else if(TextUtils.isEmpty(email)){
+                    emailEditText.setError("Le champ 'Nom' ne peut pas être vide");
+                    emailEditText.requestFocus();
+                }
+                else if(TextUtils.isEmpty(rib))
+                {
+                    ribEditText.setError("Le champ 'Nom' ne peut pas être vide");
+                    ribEditText.requestFocus();
+                }
+                else {
+                    DocumentReference assoDocRef = db.collection("Assos").document(assoId);
+                    assoDocRef
+                            .update("nom", nom, "email", email,"RIB",rib)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("updateAssoDoc Success", "DocumentSnapshot successfully updated!");
+                                    nomAsso = nom;
+                                    Toast.makeText(InfosActivity.this, "Les modifications sont enregistrées", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("updateAssoDoc Fail", "Error updating document");
+                                }
+                            });
+                }
+            }
+        });
     }
 
     @Override
@@ -69,6 +192,7 @@ public class InfosActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
         bundle = new Bundle();
         bundle.putString("key1",nomAsso);
+        bundle.putString("key2",assoId);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
@@ -101,30 +225,18 @@ public class InfosActivity extends AppCompatActivity {
         //Accès au document détenant les information de l'asso
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        final String[] assoId = new String[1];
-        db
-                .collection("Users")
-                .document(uid).collection("Assos")
-                .document(nomAsso)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                       assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
-                        Log.d("getAssoId Success", "Récupération de l'Id : "+assoId[0]);
-                        DocumentReference docRef = db.collection("Assos").document(assoId[0]);
+        final String[] asso_Id = new String[1];
+        DocumentReference docRef = db.collection("Assos").document(assoId);
 
-                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                Log.d("getAssoDoc Success", "Récupération des informations de l'asso "+nomAsso);
-                                Asso asso = documentSnapshot.toObject(Asso.class);
-                                nAEditText.setText(asso.getNom());
-                                emailEditText.setText(asso.getEmail());
-                                ribEditText.setText(asso.getRIB());
-                            }
-                        });
-                    }
-                });
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.d("getAssoDoc Success", "Récupération des informations de l'asso "+nomAsso);
+                Asso asso = documentSnapshot.toObject(Asso.class);
+                nAEditText.setText(asso.getNom());
+                emailEditText.setText(asso.getEmail());
+                ribEditText.setText(asso.getRIB());
+            }
+        });
     }
 }
