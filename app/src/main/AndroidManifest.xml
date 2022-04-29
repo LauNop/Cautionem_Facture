@@ -15,10 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cautionem">
         <activity
-            android:name=".FileListActivity"></activity>
+            android:name=".FileListActivity"/>
         <activity
             android:name=".AssoActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="asso.com"
+                    android:scheme="https"/>
+                <data
+                    android:host="asso.com"
+                    android:scheme="http"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Photo_Activity"
             android:exported="false" />
@@ -27,7 +39,7 @@
             android:exported="false" />
         <activity
             android:name=".SuiviActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".Facture_Activity"
             android:exported="true" />

@@ -3,6 +3,7 @@ package com.example.cautionem;
 import static com.example.cautionem.R.id.Asso_list;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,10 +21,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -58,6 +63,8 @@ public class AssoActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        getDynamicLinkFromFirebase();
 
         crée_but.setClickable(false);
         rejoindre_but.setClickable(false);
@@ -103,6 +110,34 @@ public class AssoActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void getDynamicLinkFromFirebase() {
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(getIntent())
+                .addOnSuccessListener(new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                        Log.i("AssoActivity","Nous avons un lien dynamique");
+                        Uri deeplink = null;
+
+                        if(pendingDynamicLinkData!=null){
+                            deeplink = pendingDynamicLinkData.getLink();
+                        }
+
+                        if(deeplink!=null){
+                            Log.i("AssoActivity","Voici le lien dynamique \n" + deeplink.toString());
+                        }
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AssoActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
 
     @Override
