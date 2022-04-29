@@ -117,28 +117,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             public boolean onLongClick(View v) {
 
                 PopupMenu popupMenu = new PopupMenu(context,v);
-                popupMenu.getMenu().add("DELETE");
-                popupMenu.getMenu().add("MOVE");
-                popupMenu.getMenu().add("RENAME");
+                popupMenu.getMenu().add("Supprimé");
+
+                popupMenu.getMenu().add("Renomé");
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getTitle().equals("DELETE")){
+                        if(item.getTitle().equals("Supprimé")){
                             boolean deleted = selectedFile.delete();
                             if(deleted){
-                                Toast.makeText(context.getApplicationContext(),"DELETED ",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context.getApplicationContext(),"Supprimé ",Toast.LENGTH_SHORT).show();
                                 v.setVisibility(View.GONE);
                             }
                         }
-                        if(item.getTitle().equals("MOVE")){
+                        if(item.getTitle().equals("Renomé")){
 
-                            Toast.makeText(context.getApplicationContext(),"MOVED ",Toast.LENGTH_SHORT).show();
-
-                        }
-                        if(item.getTitle().equals("RENAME")){
-
-                            Toast.makeText(context.getApplicationContext(),"RENAME ",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context.getApplicationContext(),"Renomé ",Toast.LENGTH_SHORT).show();
 
                         }
                         return true;
