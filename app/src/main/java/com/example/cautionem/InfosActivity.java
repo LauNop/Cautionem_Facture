@@ -173,6 +173,7 @@ public class InfosActivity extends AppCompatActivity {
                                 public void onSuccess(Void aVoid) {
                                     Log.d("updateAssoDoc Success", "DocumentSnapshot successfully updated!");
                                     nomAsso = nom;
+                                    //Changer l'id du doc dans Users/userId/Assos
                                     Toast.makeText(InfosActivity.this, "Les modifications sont enregistrées", Toast.LENGTH_SHORT).show();
                                 }
                             })
@@ -225,7 +226,6 @@ public class InfosActivity extends AppCompatActivity {
         //Accès au document détenant les information de l'asso
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        final String[] asso_Id = new String[1];
         DocumentReference docRef = db.collection("Assos").document(assoId);
 
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
