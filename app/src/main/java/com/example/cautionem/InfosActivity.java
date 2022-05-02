@@ -167,7 +167,7 @@ public class InfosActivity extends AppCompatActivity {
                 else {
                     DocumentReference assoDocRef = db.collection("Assos").document(assoId);
                     assoDocRef
-                            .update("nom", nom, "email", email,"RIB",rib)
+                            .update("nom", nom, "email", email,"rib",rib)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
