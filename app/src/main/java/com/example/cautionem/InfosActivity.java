@@ -20,13 +20,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class InfosActivity extends AppCompatActivity {
 
@@ -165,6 +169,8 @@ public class InfosActivity extends AppCompatActivity {
                     ribEditText.requestFocus();
                 }
                 else {
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    String uid = user.getUid();
                     DocumentReference assoDocRef = db.collection("Assos").document(assoId);
                     assoDocRef
                             .update("nom", nom, "email", email,"rib",rib)
@@ -173,6 +179,44 @@ public class InfosActivity extends AppCompatActivity {
                                 public void onSuccess(Void aVoid) {
                                     Log.d("updateAssoDoc Success", "DocumentSnapshot successfully updated!");
                                     nomAsso = nom;
+                                    db
+                                            .collection("Users")
+                                            .document(uid)
+                                            .collection("Assos")
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                                            User_Asso userAsso = document.toObject(User_Asso.class);
+                                                            if(userAsso.getId() == assoId){
+                                                                document.getReference().delete();
+                                                                db
+                                                                        .collection("Users")
+                                                                        .document(uid)
+                                                                        .collection("Assos")
+                                                                        .document(nomAsso)
+                                                                        .set(userAsso)
+                                                                        .addOnSuccessListener(new OnSuccessListener<Void>(){
+                                                                            @Override
+                                                                            public void onSuccess(Void aVoid) {
+                                                                                Log.d("addUserAssoDoc Success", "Document "+nomAsso+" ajouté");
+                                                                            }
+                                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                                            @Override
+                                                                            public void onFailure(@NonNull Exception e) {
+                                                                                Log.d("addUserAssoDoc Fail", "Echec : Ajout du Document "+nomAsso);
+                                                                            }
+                                                                        });
+                                                            }
+                                                            Log.d("getMembre Success", document.getId() + " => " + document.getData());
+                                                        }
+                                                    } else {
+                                                        Log.d("get Fail", "Error getting documents: ", task.getException());
+                                                    }
+                                                }
+                                            });
                                     //Changer l'id du doc dans Users/userId/Assos
                                     Toast.makeText(InfosActivity.this, "Les modifications sont enregistrées", Toast.LENGTH_SHORT).show();
                                 }
@@ -211,7 +255,8 @@ public class InfosActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.compte :
                 //Go to profil Activity
-                Toast.makeText(InfosActivity.this,"Compte clicked",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), Modif_Compte_Activity.class));
+                finish();
                 break;
             case R.id.déconnexion:
                 mAuth.signOut();

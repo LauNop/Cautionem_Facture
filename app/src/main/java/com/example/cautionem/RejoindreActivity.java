@@ -57,7 +57,8 @@ public class RejoindreActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.compte :
                 //Go to profil Activity
-                Toast.makeText(RejoindreActivity.this,"Compte clicked",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), Modif_Compte_Activity.class));
+                finish();
                 break;
             case R.id.déconnexion:
                 mAuth.signOut();

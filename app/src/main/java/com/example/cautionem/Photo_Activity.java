@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 public class Photo_Activity extends AppCompatActivity {
     private Button valider;
+    private int page;
     private int idNumPhoto;
 
     Bundle bundle;
@@ -22,15 +23,28 @@ public class Photo_Activity extends AppCompatActivity {
 
         this.valider = (Button) findViewById(R.id.valid_buton);
 
+        bundle = getIntent().getExtras();
+        page = bundle.getInt("key1");
+
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Inscription2Activity.class);
-                bundle = new Bundle();
-                bundle.putInt("key1",idNumPhoto);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
+                if(page==1) {
+                    Intent intent = new Intent(getApplicationContext(), Inscription2Activity.class);
+                    bundle = new Bundle();
+                    bundle.putInt("key1", idNumPhoto);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
+                else if(page==2){
+                    Intent intent = new Intent(getApplicationContext(), Modif_Compte_Activity.class);
+                    bundle = new Bundle();
+                    bundle.putInt("key1", idNumPhoto);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }

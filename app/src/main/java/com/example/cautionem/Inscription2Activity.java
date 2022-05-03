@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +48,7 @@ public class Inscription2Activity extends AppCompatActivity {
         this.prénomEditText = findViewById(R.id.prénomInput);
         this.nomEditText = findViewById(R.id.nomInput);
         this.thepen = (ImageView) findViewById(R.id.imagePen);
-        this.profil = (ImageView) findViewById(R.id.profil_image);
+        this.profil = (ImageView) findViewById(R.id.profil_img);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -102,7 +101,11 @@ public class Inscription2Activity extends AppCompatActivity {
         thepen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Photo_Activity.class));
+                Intent intent = new Intent(getApplicationContext(), Photo_Activity.class);
+                bundle = new Bundle();
+                bundle.putInt("key1",1);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 finish();
             }
         });

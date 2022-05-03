@@ -11,7 +11,7 @@
         android:id="@+id/nom_utilisateur"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="20dp"
         android:autofillHints="@string/prompt_nom"
         android:ems="10"
         android:hint="@string/prompt_nom"
@@ -21,13 +21,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/prenom_utilisateur" />
 
     <EditText
         android:id="@+id/email_utilisateur"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="20dp"
         android:autofillHints="@string/prompt_email"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prenom_utilisateur" />
+        app:layout_constraintTop_toBottomOf="@+id/nom_utilisateur" />
 
     <EditText
         android:id="@+id/prenom_utilisateur"
@@ -74,6 +74,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="60dp"
         android:text="@string/save"
@@ -82,6 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_utilisateur"
         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
     <androidx.cardview.widget.CardView
@@ -97,9 +99,10 @@
         app:layout_constraintVertical_bias="0.487">
 
         <ImageView
-            android:id="@+id/profil_image"
+            android:id="@+id/profil_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clickable="true"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_lambda_profile" />
