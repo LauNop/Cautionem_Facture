@@ -122,7 +122,6 @@ public class Membre_Activity extends AppCompatActivity {
     private void assemblageMembre() {
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        final String[] assoId = new String[1];
 
 
 
@@ -135,8 +134,7 @@ public class Membre_Activity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
-                        CollectionReference dbMembre = db.collection("Assos").document(assoId[0]).collection("Membres");
+                        CollectionReference dbMembre = db.collection("Assos").document(assoId).collection("Membres");
                         dbMembre
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
