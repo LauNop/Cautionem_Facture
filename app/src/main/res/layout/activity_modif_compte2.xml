@@ -8,24 +8,26 @@
     tools:context=".InfosActivity">
 
     <EditText
-        android:id="@+id/motDePasse"
+        android:id="@+id/nom_utilisateur"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:autofillHints="@string/prompt_RIB"
+        android:layout_marginTop="280dp"
+        android:autofillHints="@string/prompt_nom"
         android:ems="10"
-        android:hint="@string/motdepasse"
-        android:inputType="textLongMessage|textPassword"
+        android:hint="@string/prompt_nom"
+        android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailPlace" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/emailPlace"
+        android:id="@+id/email_utilisateur"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="128dp"
         android:autofillHints="@string/prompt_email"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
@@ -33,6 +35,7 @@
         android:selectAllOnFocus="true"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nomutilisateur" />
 
@@ -41,9 +44,9 @@
         android:layout_width="371dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="184dp"
-        android:autofillHints="@string/prompt_name"
+        android:autofillHints="@string/prompt_prénom"
         android:ems="10"
-        android:hint="@string/nomutilisateur"
+        android:hint="@string/prompt_prénom"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#757575"
@@ -58,7 +61,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/comfortaa"
-        android:text="@string/info"
+        android:gravity="center"
+        android:text="@string/compte"
         android:textColor="#100F0F"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,21 +88,21 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
+        app:cardCornerRadius="250dp"
         app:layout_constraintBottom_toTopOf="@+id/nomutilisateur"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.487"
-        app:cardCornerRadius="250dp">
+        app:layout_constraintVertical_bias="0.487">
 
         <ImageView
             android:id="@+id/profil_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_lambda_profile"
-            android:contentDescription="@string/todo" />
+            android:src="@drawable/ic_lambda_profile" />
 
     </androidx.cardview.widget.CardView>
 
