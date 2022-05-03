@@ -57,7 +57,7 @@ public class InfosActivity extends AppCompatActivity {
         linkTextView.setLinkTextColor(Color.BLUE);
 
         this.nAEditText = findViewById(R.id.nomAssoPlace);
-        this.emailEditText = findViewById(R.id.emailPlace);
+        this.emailEditText = findViewById(R.id.email_utilisateur);
         this.ribEditText = findViewById(R.id.ribPlace);
         this.savebtn = (Button) findViewById(R.id.savebtn);
 
