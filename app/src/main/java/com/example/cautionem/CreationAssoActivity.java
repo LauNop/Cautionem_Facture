@@ -144,6 +144,7 @@ public class CreationAssoActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
                     bundle = new Bundle();
                     bundle.putString("key1",nomAsso);
+                    bundle.putString("key2",idDoc);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
