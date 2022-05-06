@@ -79,7 +79,7 @@ public class Membre_Activity extends AppCompatActivity {
                 Uri dynamicLinkUri = dynamicLink.getUri();
                 ClipData clip = ClipData.newPlainText("label",dynamicLinkUri.toString());
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(Membre_Activity.this, "Lien copié", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Membre_Activity.this, "Lien d'invitation copié", Toast.LENGTH_SHORT).show();
             }
         });
 

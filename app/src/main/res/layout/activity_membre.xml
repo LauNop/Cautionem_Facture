@@ -27,6 +27,6 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:contentDescription="@string/JOC"
-        android:src="@drawable/ic_addorjoin_white"
+        android:src="@drawable/ic_baseline_link_24"
         app:fabSize="normal" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
