@@ -48,7 +48,7 @@ public class Inscription2Activity extends AppCompatActivity {
         this.prénomEditText = findViewById(R.id.prénomInput);
         this.nomEditText = findViewById(R.id.nomInput);
         this.thepen = (ImageView) findViewById(R.id.imagePen);
-        this.profil = (ImageView) findViewById(R.id.profil_img);
+        this.profil = (ImageView) findViewById(R.id.profil_image);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();

@@ -28,8 +28,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.Collection;
-
 public class Modif_Compte_Activity extends AppCompatActivity {
 
     private EditText nomEditeText, prenomEditText, mailEditText;
@@ -54,7 +52,7 @@ public class Modif_Compte_Activity extends AppCompatActivity {
         this.prenomEditText = findViewById(R.id.prenom_utilisateur);
         this.mailEditText = findViewById(R.id.email_utilisateur);
         this.ENbtn = (Button) findViewById(R.id.ENbtn);
-        this.profil =(ImageView) findViewById(R.id.profil_img);
+        this.profil =(ImageView) findViewById(R.id.profil_img2);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
