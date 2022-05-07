@@ -18,7 +18,7 @@
     <string name="login_failed">"Erreur de connexion"</string>
     <string name="création">Crée</string>
     <string name="rejoindre">Rejoindre</string>
-    <string name="p">Président(e)</string>
+    <string name="p">Administrateur(e)</string>
     <string name="vp">Vice-Président(e)</string>
     <string name="t">Trésorier</string>
     <string name="com">Responsable communication</string>

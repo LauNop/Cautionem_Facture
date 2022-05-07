@@ -3,7 +3,7 @@ package com.example.cautionem;
 import androidx.annotation.Nullable;
 
 public class Membre {
-    final static String R1 = "Président";
+    final static String R1 = "Administrateur";
     final static String R2 = "Vice-président";
     final static String R3 = "Trésorier";
     final static String R4 = "Secrétaire";
