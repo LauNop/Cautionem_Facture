@@ -1,7 +1,9 @@
 package com.example.cautionem;
 
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,9 +28,11 @@ import java.util.ArrayList;
 
 public class Facture_Adapter extends BaseAdapter {
 
+    private static final String DIRECTORY_DOWNLAODS = Environment.getExternalStorageDirectory().getPath()+"/Downloads";
     //  Infos
     private Context context;
     private ArrayList<Facture> factureList;
+    private Facture currentItem;
     private LayoutInflater inflater;
     FirebaseStorage storage;
     StorageReference storageRef;
@@ -63,7 +67,7 @@ public class Facture_Adapter extends BaseAdapter {
         view = inflater.inflate(R.layout.adapter_facture, null);
 
         //  Infos d'une facture
-        Facture currentItem = getItem(i);
+        currentItem = getItem(i);
 
         //  Récupération du nom de la facture
         TextView roleView = view.findViewById(R.id.nom_facture);
@@ -72,53 +76,41 @@ public class Facture_Adapter extends BaseAdapter {
         telecharger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                storage = FirebaseStorage.getInstance("gs://cautionem-a1155.appspot.com/");
-                // Create a storage reference from our app
-                storageRef = storage.getReference().child(assoId);
-
-                StorageReference islandRef = storageRef.child(currentItem.getNom());
-
-                File localFolder = new File(Environment.getExternalStorageDirectory().getPath(), "Cautionem_Factures");
-                File localFile = new File(localFolder, currentItem.getNom());
-                if(localFolder.exists()){
-                    try{
-                        localFile.mkdir();
-                    } catch(Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                else{
-                    try{
-                        localFolder.mkdir();
-                        localFile.mkdir();
-                    } catch(Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                Log.d("Fichier enregistré ici: ",Environment.getExternalStorageDirectory().getPath());
-                /* try {
-                    localFile = File.createTempFile("Cautionem_Factures", "pdf");
-                    Log.d("File Created","Téléchargement du fichier:"+currentItem.getNom());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-
-                islandRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Log.d("Download Success","Téléchargement du fichier:"+currentItem.getNom());
-                        // Local temp file has been created
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Log.d("Download Fail","Téléchargement du fichier:"+currentItem.getNom()+" échoué");
-                        // Handle any errors
-                    }
-                });
+                downlaod();
             }
         });
 
         return view;
+    }
+
+    public void downlaod()
+    {
+        storage = FirebaseStorage.getInstance("gs://cautionem-a1155.appspot.com/");
+        storageRef = storage.getReference().child(assoId).child(currentItem.getNom());
+
+        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String url = uri.toString();
+                downlaodFiles(context, currentItem.getNom(), "",DIRECTORY_DOWNLAODS,url);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    private void downlaodFiles(Context context,String fileName, String fileExtension, String destinationDirectory, String url)
+    {
+        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(context, destinationDirectory, fileName+fileExtension);
+
+        downloadManager.enqueue(request);
     }
 }
