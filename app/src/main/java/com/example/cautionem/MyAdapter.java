@@ -97,7 +97,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                             // ...
-                            Log.d("Upload in Cloud Storage", "Success");
+                            Log.d("Upload in Cloud Storage", "Success"+selectedFile.getAbsolutePath());
                         }
                     });
                     /*try {
