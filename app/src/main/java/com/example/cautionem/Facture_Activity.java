@@ -93,8 +93,6 @@ public class Facture_Activity extends AppCompatActivity {
         nomAsso = bundle.getString("key1","Default");
         assoId = bundle.getString("key2");
 
-        facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
-
         assemblageFacture();
     }
 
@@ -164,11 +162,10 @@ public class Facture_Activity extends AppCompatActivity {
                         }
 
                         for (StorageReference item : listResult.getItems()) {
-                            Toast.makeText(Facture_Activity.this,item.getName(),Toast.LENGTH_SHORT).show();
                             FactureList.add(new Facture(item.getName()));
                             // All the items under listRef.
                         }
-                        facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
+                        facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList,assoId));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
