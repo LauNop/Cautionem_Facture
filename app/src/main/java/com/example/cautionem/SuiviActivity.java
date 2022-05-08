@@ -63,6 +63,7 @@ public class SuiviActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Facture_Activity.class);
                 bundle = new Bundle();
                 bundle.putString("key1",nomAsso);
+                bundle.putString("key2",assoId);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();

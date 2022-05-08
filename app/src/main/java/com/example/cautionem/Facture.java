@@ -6,12 +6,18 @@ public class Facture {
     private String nom;
 
     //  Classe
+    public Facture(){
+
+    }
     public Facture(String nom){
         this.nom=nom;
 
     }
 
-    //  Méthodes
-    public String getRole(){return nom;}
+    // --- GETTERS ---
+    public String getNom(){return nom;}
+
+    // --- SETTERS ---
+    public void setNom(String nom){this.nom =nom;}
 
 }

@@ -3,6 +3,7 @@ package com.example.cautionem;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,12 +34,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
     Context context;
     File[] filesAndFolders;
+    String assoId;
     FirebaseStorage storage;
     StorageReference storageRef;
 
-    public MyAdapter(Context context, File[] filesAndFolders){
+    Bundle bundle;
+
+    public MyAdapter(Context context, File[] filesAndFolders,String assoId){
         this.context = context;
         this.filesAndFolders = filesAndFolders;
+        this.assoId = assoId;
+        Log.d("Get AssoId", assoId);
+
     }
 
 
@@ -46,9 +53,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.recycler_item,parent,false);
-        storage = FirebaseStorage.getInstance("gs://cautionem-a1155.appspot.com/");
-        // Create a storage reference from our app
-         storageRef = storage.getReference().child("assoId");
+
 
         return new ViewHolder(view);
     }
@@ -59,12 +64,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         File selectedFile = filesAndFolders[position];
         holder.textView.setText(selectedFile.getName());
 
+        storage = FirebaseStorage.getInstance("gs://cautionem-a1155.appspot.com/");
         // Create a storage reference from our app
-        StorageReference storageRef = storage.getReference();
-        // Create a child reference
-        // imagesRef now points to "images"
-        StorageReference factureRef = storageRef.child("factures");
-        StorageReference facture1Ref = factureRef.child("facture_1.pdf");
+        storageRef = storage.getReference().child(assoId);
         if(selectedFile.isDirectory()){
             holder.imageView.setImageResource(R.drawable.ic_baseline_folder_24);
         }else{
@@ -76,6 +78,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             public void onClick(View v) {
                 if(selectedFile.isDirectory()){
                     Intent intent = new Intent(context, FileListActivity.class);
+                    bundle = new Bundle();
+                    bundle.putString("key2",assoId);
+                    intent.putExtras(bundle);
                     String path = selectedFile.getAbsolutePath();
                     intent.putExtra("path",path);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

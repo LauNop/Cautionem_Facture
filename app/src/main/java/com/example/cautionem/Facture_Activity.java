@@ -12,6 +12,8 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.view.View;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.material.button.MaterialButton;
 
 
@@ -36,17 +38,21 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 public class Facture_Activity extends AppCompatActivity {
 
     private ArrayList<Facture> FactureList = new ArrayList<Facture>();
-    private String nomAsso;
+    private String nomAsso,assoId;
     private ListView facturelistView;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
+    FirebaseStorage storage;
 
     Bundle bundle;
 
@@ -63,6 +69,9 @@ public class Facture_Activity extends AppCompatActivity {
                 if(checkPermission()){
                     //permission allowed
                     Intent intent = new Intent(Facture_Activity.this, FileListActivity.class);
+                    bundle = new Bundle();
+                    bundle.putString("key2",assoId);
+                    intent.putExtras(bundle);
                     String path = Environment.getExternalStorageDirectory().getPath();
                     intent.putExtra("path",path);
                     startActivity(intent);
@@ -78,13 +87,13 @@ public class Facture_Activity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance("gs://cautionem-a1155.appspot.com/");
 
         bundle = getIntent().getExtras();
         nomAsso = bundle.getString("key1","Default");
+        assoId = bundle.getString("key2");
 
-        FactureList.add(new Facture("Facture 01"));
-        FactureList.add(new Facture("Facture 02"));
-        FactureList.add(new Facture("Facture 03"));
+        facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
 
         assemblageFacture();
     }
@@ -111,6 +120,7 @@ public class Facture_Activity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
         bundle = new Bundle();
         bundle.putString("key1",nomAsso);
+        bundle.putString("key2",assoId);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
@@ -141,44 +151,31 @@ public class Facture_Activity extends AppCompatActivity {
     }
 
     private void assemblageFacture() {
-        FirebaseUser user = mAuth.getCurrentUser();
-        String uid = user.getUid();
-        final String[] assoId = new String[1];
 
+        StorageReference listRef = storage.getReference().child(assoId);
 
-
-        db
-                .collection("Users")
-                .document(uid).collection("Assos")
-                .document(nomAsso)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        listRef.listAll()
+                .addOnSuccessListener(new OnSuccessListener<ListResult>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Log.d("getAssoId Success", "Récupération de l'"+documentSnapshot.getData()+" de l'Asso "+documentSnapshot.getId());
-                        assoId[0] = documentSnapshot.toObject(User_Asso.class).getId();
-                        CollectionReference dbFacture = db.collection("Assos").document(assoId[0]).collection("Factures");
-                        dbFacture
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        Log.d("accessCollectionFacture Success", "");
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                                Facture facture = document.toObject(Facture.class);
-                                                FactureList.add(facture);
-                                                Log.d("getFactureDoc Success", document.getId() + " => " + document.getData());
-                                            }
-                                            facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
-                                        } else {
-                                            Log.d("getAllFactureDoc Fail", "");
-                                        }
-                                    }
-                                });
+                    public void onSuccess(ListResult listResult) {
+                        for (StorageReference prefix : listResult.getPrefixes()) {
+                            // All the prefixes under listRef.
+                            // You may call listAll() recursively on them.
+                        }
+
+                        for (StorageReference item : listResult.getItems()) {
+                            Toast.makeText(Facture_Activity.this,item.getName(),Toast.LENGTH_SHORT).show();
+                            FactureList.add(new Facture(item.getName()));
+                            // All the items under listRef.
+                        }
+                        facturelistView.setAdapter(new Facture_Adapter(Facture_Activity.this,FactureList));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Uh-oh, an error occurred!
                     }
                 });
-
-
     }
 }

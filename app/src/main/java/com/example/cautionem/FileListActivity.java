@@ -13,6 +13,9 @@ import java.io.File;
 
 public class FileListActivity extends AppCompatActivity {
 
+    private String assoId;
+    Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,9 @@ public class FileListActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         TextView noFilesText = findViewById(R.id.nofiles_textview);
+
+        bundle = getIntent().getExtras();
+        assoId = bundle.getString("key2");
 
         String path = getIntent().getStringExtra("path");
         File root = new File(path);
@@ -33,7 +39,7 @@ public class FileListActivity extends AppCompatActivity {
         noFilesText.setVisibility(View.INVISIBLE);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MyAdapter(getApplicationContext(),filesAndFolders));
+        recyclerView.setAdapter(new MyAdapter(getApplicationContext(),filesAndFolders,assoId));
 
 
 

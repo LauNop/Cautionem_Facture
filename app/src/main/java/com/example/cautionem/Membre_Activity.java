@@ -90,6 +90,7 @@ public class Membre_Activity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SuiviActivity.class);
         bundle = new Bundle();
         bundle.putString("key1",nomAsso);
+        bundle.putString("key2",assoId);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -49,7 +50,14 @@ public class Facture_Adapter extends BaseAdapter {
 
         //  Récupération du nom de la facture
         TextView roleView = view.findViewById(R.id.nom_facture);
-        roleView.setText(currentItem.getRole());
+        ImageButton telecharger =view.findViewById(R.id.telecharger);
+        roleView.setText(currentItem.getNom());
+        telecharger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         return view;
     }
