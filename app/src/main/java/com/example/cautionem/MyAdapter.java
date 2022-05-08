@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     Context context;
     File[] filesAndFolders;
     FirebaseStorage storage;
+    StorageReference storageRef;
 
     public MyAdapter(Context context, File[] filesAndFolders){
         this.context = context;
@@ -44,7 +46,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.recycler_item,parent,false);
-        storage = FirebaseStorage.getInstance();
+        storage = FirebaseStorage.getInstance("gs://cautionem-a1155.appspot.com/");
+        // Create a storage reference from our app
+         storageRef = storage.getReference().child("assoId");
+
         return new ViewHolder(view);
     }
 
@@ -76,28 +81,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }else{
-                   /* InputStream stream = null;
-                    try {
-                        stream = new FileInputStream(new File(selectedFile.getAbsolutePath()));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    Uri file = Uri.fromFile(new File(selectedFile.getAbsolutePath()));
+                    StorageReference riversRef = storageRef.child(file.getLastPathSegment());
+                    UploadTask uploadTask = riversRef.putFile(file);
 
-                    UploadTask uploadTask = facture1Ref.putStream(stream);
+                    // Register observers to listen for when the download is done or if it fails
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
                             // Handle unsuccessful uploads
+                            Log.d("Upload in Cloud Storage", "Fail");
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                             // ...
+                            Log.d("Upload in Cloud Storage", "Success");
                         }
-                    });*/
-                    //open the file
-                    try {
+                    });
+                    /*try {
                         //Ouvrir avec un pdf
                         Intent intent = new Intent();
                         intent.setAction(android.content.Intent.ACTION_VIEW);
@@ -107,7 +110,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
                         context.startActivity(intent);
                     }catch (Exception e){
                         Toast.makeText(context.getApplicationContext(),"Cannot open the file",Toast.LENGTH_SHORT).show();
-                    }
+                    }*/
                 }
             }
         });

@@ -51,15 +51,6 @@ public class InfosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infos);
 
-        // Text view number 1 to add hyperlink
-        TextView linkTextView = findViewById(R.id.textView6);
-
-        // method to redirect to provided link
-        linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
-
-        // method to change color of link
-        linkTextView.setLinkTextColor(Color.BLUE);
-
         this.nAEditText = findViewById(R.id.nomAssoPlace);
         this.emailEditText = findViewById(R.id.email_utilisateur);
         this.ribEditText = findViewById(R.id.ribPlace);
