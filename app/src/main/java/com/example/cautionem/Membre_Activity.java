@@ -124,36 +124,32 @@ public class Membre_Activity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
 
-
-
-        db
-                .collection("Users")
-                .document(uid)
-                .collection("Assos")
-                .document(nomAsso)
+        CollectionReference dbMembre = db.collection("Assos").document(assoId).collection("Membres");
+        dbMembre
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        CollectionReference dbMembre = db.collection("Assos").document(assoId).collection("Membres");
-                        dbMembre
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                                Membre membre = document.toObject(Membre.class);
-                                                MembreList.add(membre);
-                                                Log.d("getMembre Success", document.getId() + " => " + document.getData());
-                                            }
-                                            membreListView.setAdapter(new Membre_Adapter(Membre_Activity.this, MembreList));
-                                        } else {
-                                            Log.d("getMembre Fail", "Error getting documents: ", task.getException());
-                                        }
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Membre membre = document.toObject(Membre.class);
+                                MembreList.add(membre);
+                                Log.d("getMembre Success", document.getId() + " => " + document.getData());
+                                if(document.getId().equals(uid)) {
+                                    if (!membre.getRole().equals(Membre.R1)) {
+                                        lien.setEnabled(false);
+                                        lien.setVisibility(View.INVISIBLE);
+                                        Log.d("Bouton désactivé", uid + " ne peut pas ajouter de membre car il est " + membre.getRole());
                                     }
-                                });
+                                }
+                            }
+                            membreListView.setAdapter(new Membre_Adapter(Membre_Activity.this, MembreList));
+                        } else {
+                            Log.d("getMembre Fail", "Error getting documents: ", task.getException());
+                        }
                     }
                 });
+
+
     }
 }
